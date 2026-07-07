@@ -1,8 +1,8 @@
 {
-  "name": "the-reality-loom",
+  "name": "reality-loom",
   "version": "0.1.0",
   "private": true,
-  "description": "The Reality Loom \u2014 Reference Implementation of Reality-Oriented Computing (ROC): WIL, WDL, WGE, SLI, SDK.",
+  "description": "Reality Loom \u2014 the open foundation for Reality-Oriented Computing: WIL, WDL, WGE, SLI, SDK reference implementation.",
   "type": "module",
   "engines": {
     "node": ">=22",
