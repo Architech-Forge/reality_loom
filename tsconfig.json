@@ -60,6 +60,9 @@
     },
     {
       "path": "packages/roc/storage"
+    },
+    {
+      "path": "packages/roc/security"
     }
   ]
 }

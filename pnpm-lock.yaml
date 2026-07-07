@@ -26,6 +26,9 @@ importers:
       '@roc/sdk':
         specifier: workspace:*
         version: link:packages/sdk
+      '@roc/security':
+        specifier: workspace:*
+        version: link:packages/roc/security
       '@roc/storage':
         specifier: workspace:*
         version: link:packages/roc/storage
@@ -139,6 +142,12 @@ importers:
         version: link:../types
 
   packages/roc/diagnostics:
+    dependencies:
+      '@roc/types':
+        specifier: workspace:*
+        version: link:../types
+
+  packages/roc/security:
     dependencies:
       '@roc/types':
         specifier: workspace:*

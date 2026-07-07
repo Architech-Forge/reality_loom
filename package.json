@@ -44,6 +44,7 @@
     "@examples/family-style-world": "workspace:*",
     "@apps/reference-demo": "workspace:*",
     "@roc/app-integration": "workspace:*",
-    "@roc/storage": "workspace:*"
+    "@roc/storage": "workspace:*",
+    "@roc/security": "workspace:*"
   }
 }

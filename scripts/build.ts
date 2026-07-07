@@ -31,6 +31,7 @@ const BUILD_ORDER: string[] = [
   "packages/sdk", // 16. @roc/sdk          (Milestone 6)
   "packages/roc/app-integration", // Vol 1700 — Application Integration
   "packages/roc/storage", // Vol 2200 — Storage And Persistence
+  "packages/roc/security", // Vol 2300 — Security And Permissions
   "examples/family-style-world", // 17. Reference applications
   "apps/reference-demo" // 17. Reference applications
 ];
