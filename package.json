@@ -25,6 +25,23 @@
     "tsx": "^4.19.0",
     "typescript": "^5.7.0",
     "typescript-eslint": "^8.24.0",
-    "vitest": "^3.0.0"
+    "vitest": "^3.0.0",
+    "@roc/types": "workspace:*",
+    "@roc/compliance": "workspace:*",
+    "@roc/sdk": "workspace:*",
+    "@roc/testing": "workspace:*",
+    "@wge/wil": "workspace:*",
+    "@wge/wdl": "workspace:*",
+    "@wge/kernel": "workspace:*",
+    "@wge/graph": "workspace:*",
+    "@wge/compiler": "workspace:*",
+    "@wge/executable": "workspace:*",
+    "@wge/runtime": "workspace:*",
+    "@wge/physics": "workspace:*",
+    "@sli/runtime": "workspace:*",
+    "@sli/design-system": "workspace:*",
+    "@sli/renderer-contract": "workspace:*",
+    "@examples/family-style-world": "workspace:*",
+    "@apps/reference-demo": "workspace:*"
   }
 }

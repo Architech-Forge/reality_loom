@@ -8,12 +8,63 @@ importers:
 
   .:
     devDependencies:
+      '@apps/reference-demo':
+        specifier: workspace:*
+        version: link:apps/reference-demo
       '@eslint/js':
         specifier: ^9.20.0
         version: 9.39.4
+      '@examples/family-style-world':
+        specifier: workspace:*
+        version: link:examples/family-style-world
+      '@roc/compliance':
+        specifier: workspace:*
+        version: link:packages/roc/compliance
+      '@roc/sdk':
+        specifier: workspace:*
+        version: link:packages/sdk
+      '@roc/testing':
+        specifier: workspace:*
+        version: link:packages/roc/testing
+      '@roc/types':
+        specifier: workspace:*
+        version: link:packages/roc/types
+      '@sli/design-system':
+        specifier: workspace:*
+        version: link:packages/sli/design-system
+      '@sli/renderer-contract':
+        specifier: workspace:*
+        version: link:packages/sli/renderer-contract
+      '@sli/runtime':
+        specifier: workspace:*
+        version: link:packages/sli/runtime
       '@types/node':
         specifier: ^22
         version: 22.20.0
+      '@wge/compiler':
+        specifier: workspace:*
+        version: link:packages/wge/compiler
+      '@wge/executable':
+        specifier: workspace:*
+        version: link:packages/wge/executable
+      '@wge/graph':
+        specifier: workspace:*
+        version: link:packages/wge/graph
+      '@wge/kernel':
+        specifier: workspace:*
+        version: link:packages/wge/kernel
+      '@wge/physics':
+        specifier: workspace:*
+        version: link:packages/wge/physics
+      '@wge/runtime':
+        specifier: workspace:*
+        version: link:packages/wge/runtime
+      '@wge/wdl':
+        specifier: workspace:*
+        version: link:packages/wge/wdl
+      '@wge/wil':
+        specifier: workspace:*
+        version: link:packages/wge/wil
       eslint:
         specifier: ^9.20.0
         version: 9.39.4
@@ -62,6 +113,12 @@ importers:
       '@wge/wdl':
         specifier: workspace:*
         version: link:../../packages/wge/wdl
+
+  packages/roc/compliance:
+    dependencies:
+      '@roc/types':
+        specifier: workspace:*
+        version: link:../types
 
   packages/roc/diagnostics:
     dependencies:

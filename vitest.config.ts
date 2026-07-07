@@ -21,6 +21,7 @@ export default defineConfig({
       "@sli/design-system": p("./packages/sli/design-system/src/index.ts"),
       "@sli/runtime": p("./packages/sli/runtime/src/index.ts"),
       "@roc/testing": p("./packages/roc/testing/src/index.ts"),
+      "@roc/compliance": p("./packages/roc/compliance/src/index.ts"),
       "@roc/sdk": p("./packages/sdk/src/index.ts"),
       "@examples/family-style-world": p("./examples/family-style-world/src/index.ts"),
       "@apps/reference-demo": p("./apps/reference-demo/src/index.ts")
