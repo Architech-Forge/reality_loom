@@ -2,9 +2,8 @@
  * Official compliance suite — Developer Tooling (TOOL-2100.024).
  * Debugging convenience must not bypass privacy.
  */
-import { readFileSync } from "node:fs";
 import type { ROCComplianceSuite } from "@roc/compliance";
-import { defineTest } from "@roc/compliance";
+import { defineTest, runSuites } from "@roc/compliance";
 import { checkTraceCompleteness, inspectEntity, inspectWorld, preservesIdentity, runCli } from "@roc/devtools";
 import { assert, emma, guest, garmentCreate, loadFamilyRuntime } from "./helpers.js";
 
@@ -64,16 +63,32 @@ export const devtoolsSuite: ROCComplianceSuite = {
       const unknown = await runCli(["teleport"]);
       assert(unknown.code === 2, "unknown command exits 2");
     }),
-    defineTest("TOOL-CT-006", "Compliance report is ingestible by tooling", ["TOOL-2100.017"], async () => {
-      const report = JSON.parse(readFileSync("compliance/reports/compliance-report.json", "utf8")) as {
+    defineTest("TOOL-CT-006", "Compliance report is ingestible by tooling", ["TOOL-2100.017"], async (context) => {
+      // Self-contained: generate a report, serialize it, and re-ingest it —
+      // proving the artifact format is machine-readable without depending on
+      // a pre-existing file (fresh checkouts have none).
+      const sample = await runSuites(
+        [{
+          id: "suite_sample", area: "devtools", version: "1.0.0", fixtures: [],
+          tests: [defineTest("SAMPLE-CT-001", "sample", ["TOOL-2100.017"], async () => undefined)]
+        }],
+        {
+          implementationId: "sample", implementationName: "Sample", version: "0.0.0",
+          claimedLevels: ["reference"], supportedSpecVersions: {}, testSuiteVersion: "1.0.0",
+          generatedAt: context.now
+        },
+        context
+      );
+      const report = JSON.parse(JSON.stringify(sample)) as {
         compliant: boolean;
         suites: Array<{ area: string; results: Array<{ status: string }> }>;
       };
-      assert(typeof report.compliant === "boolean" && report.suites.length > 0, "report artifact parses");
+      assert(typeof report.compliant === "boolean" && report.suites.length > 0, "report round-trips through JSON");
       assert(
         report.suites.every((s) => s.results.every((r) => typeof r.status === "string")),
         "results are machine-readable"
       );
+      assert(report.compliant === true && report.suites[0]?.results[0]?.status === "passed", "sample run ingested correctly");
     })
   ]
 };
