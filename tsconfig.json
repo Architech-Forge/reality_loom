@@ -54,6 +54,9 @@
     },
     {
       "path": "packages/roc/compliance"
+    },
+    {
+      "path": "packages/roc/app-integration"
     }
   ]
 }

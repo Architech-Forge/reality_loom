@@ -42,6 +42,7 @@
     "@sli/design-system": "workspace:*",
     "@sli/renderer-contract": "workspace:*",
     "@examples/family-style-world": "workspace:*",
-    "@apps/reference-demo": "workspace:*"
+    "@apps/reference-demo": "workspace:*",
+    "@roc/app-integration": "workspace:*"
   }
 }

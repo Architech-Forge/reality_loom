@@ -11,12 +11,13 @@ import { ROC_REFERENCE_VERSION, WIL_PROTOCOL_VERSION } from "@roc/types";
 import { wilSuite, wdlSuite } from "../compliance/suites/protocol.suites.js";
 import { kernelSuite, graphSuite, compilerSuite, runtimeSuite, physicsSuite } from "../compliance/suites/engine.suites.js";
 import { sliSuite, designSuite, sdkSuite, referenceSuite } from "../compliance/suites/experience.suites.js";
+import { applicationSuite } from "../compliance/suites/application.suite.js";
 
 const declaration: ROCComplianceDeclaration = {
   implementationId: "the-reality-loom",
   implementationName: "The Reality Loom Reference Implementation",
   version: ROC_REFERENCE_VERSION,
-  claimedLevels: ["wil_only", "kernel", "compiler", "runtime", "physics", "sli", "sdk", "reference"],
+  claimedLevels: ["wil_only", "kernel", "compiler", "runtime", "physics", "sli", "sdk", "application", "reference"],
   supportedSpecVersions: {
     wil: WIL_PROTOCOL_VERSION,
     wdl: "1.0.0",
@@ -31,7 +32,7 @@ const declaration: ROCComplianceDeclaration = {
 };
 
 const report = await runSuites(
-  [wilSuite, wdlSuite, kernelSuite, graphSuite, compilerSuite, runtimeSuite, physicsSuite, sliSuite, designSuite, sdkSuite, referenceSuite],
+  [wilSuite, wdlSuite, kernelSuite, graphSuite, compilerSuite, runtimeSuite, physicsSuite, sliSuite, designSuite, sdkSuite, applicationSuite, referenceSuite],
   declaration,
   { now: declaration.generatedAt }
 );
