@@ -1,6 +1,34 @@
+# dependencies
 node_modules/
+.pnpm-store/
+.yarn/
+.npm/
+
+# builds
 dist/
+build/
+.next/
+out/
 coverage/
 *.tsbuildinfo
+
+# environment / secrets
+.env
+.env.*
+!.env.example
+
+# logs
+*.log
+logs/
+
+# local
 .DS_Store
+.idea/
+.vscode/
+*.local
+
+# secrets / keys
+*.pem
+
+# generated artifacts
 compliance/reports/*.json
