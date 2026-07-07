@@ -63,6 +63,9 @@
     },
     {
       "path": "packages/roc/security"
+    },
+    {
+      "path": "packages/roc/ai"
     }
   ]
 }

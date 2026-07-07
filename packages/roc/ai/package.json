@@ -1,0 +1,22 @@
+{
+  "name": "@roc/ai",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI & Reasoning (Volume 2400): AI is an Actor inside the World, not above it. AI may propose; Runtime disposes.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@roc/security": "workspace:*",
+    "@roc/app-integration": "workspace:*",
+    "@wge/wil": "workspace:*"
+  }
+}

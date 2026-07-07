@@ -45,6 +45,7 @@
     "@apps/reference-demo": "workspace:*",
     "@roc/app-integration": "workspace:*",
     "@roc/storage": "workspace:*",
-    "@roc/security": "workspace:*"
+    "@roc/security": "workspace:*",
+    "@roc/ai": "workspace:*"
   }
 }

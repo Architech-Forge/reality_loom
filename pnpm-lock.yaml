@@ -17,6 +17,9 @@ importers:
       '@examples/family-style-world':
         specifier: workspace:*
         version: link:examples/family-style-world
+      '@roc/ai':
+        specifier: workspace:*
+        version: link:packages/roc/ai
       '@roc/app-integration':
         specifier: workspace:*
         version: link:packages/roc/app-integration
@@ -122,6 +125,21 @@ importers:
       '@wge/wdl':
         specifier: workspace:*
         version: link:../../packages/wge/wdl
+
+  packages/roc/ai:
+    dependencies:
+      '@roc/app-integration':
+        specifier: workspace:*
+        version: link:../app-integration
+      '@roc/security':
+        specifier: workspace:*
+        version: link:../security
+      '@roc/types':
+        specifier: workspace:*
+        version: link:../types
+      '@wge/wil':
+        specifier: workspace:*
+        version: link:../../wge/wil
 
   packages/roc/app-integration:
     dependencies:
