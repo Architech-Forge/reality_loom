@@ -57,6 +57,9 @@
     },
     {
       "path": "packages/roc/app-integration"
+    },
+    {
+      "path": "packages/roc/storage"
     }
   ]
 }

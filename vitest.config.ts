@@ -23,6 +23,7 @@ export default defineConfig({
       "@roc/testing": p("./packages/roc/testing/src/index.ts"),
       "@roc/compliance": p("./packages/roc/compliance/src/index.ts"),
       "@roc/app-integration": p("./packages/roc/app-integration/src/index.ts"),
+      "@roc/storage": p("./packages/roc/storage/src/index.ts"),
       "@roc/sdk": p("./packages/sdk/src/index.ts"),
       "@examples/family-style-world": p("./examples/family-style-world/src/index.ts"),
       "@apps/reference-demo": p("./apps/reference-demo/src/index.ts")

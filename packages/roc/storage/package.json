@@ -1,0 +1,23 @@
+{
+  "name": "@roc/storage",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Storage & Persistence (Volume 2200): persistence preserves causality, it does not create it.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@wge/wil": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22"
+  }
+}

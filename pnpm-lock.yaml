@@ -26,6 +26,9 @@ importers:
       '@roc/sdk':
         specifier: workspace:*
         version: link:packages/sdk
+      '@roc/storage':
+        specifier: workspace:*
+        version: link:packages/roc/storage
       '@roc/testing':
         specifier: workspace:*
         version: link:packages/roc/testing
@@ -140,6 +143,19 @@ importers:
       '@roc/types':
         specifier: workspace:*
         version: link:../types
+
+  packages/roc/storage:
+    dependencies:
+      '@roc/types':
+        specifier: workspace:*
+        version: link:../types
+      '@wge/wil':
+        specifier: workspace:*
+        version: link:../../wge/wil
+    devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.20.0
 
   packages/roc/testing:
     dependencies:

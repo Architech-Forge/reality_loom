@@ -12,6 +12,7 @@ import { wilSuite, wdlSuite } from "../compliance/suites/protocol.suites.js";
 import { kernelSuite, graphSuite, compilerSuite, runtimeSuite, physicsSuite } from "../compliance/suites/engine.suites.js";
 import { sliSuite, designSuite, sdkSuite, referenceSuite } from "../compliance/suites/experience.suites.js";
 import { applicationSuite } from "../compliance/suites/application.suite.js";
+import { storageSuite } from "../compliance/suites/storage.suite.js";
 
 const declaration: ROCComplianceDeclaration = {
   implementationId: "the-reality-loom",
@@ -32,7 +33,7 @@ const declaration: ROCComplianceDeclaration = {
 };
 
 const report = await runSuites(
-  [wilSuite, wdlSuite, kernelSuite, graphSuite, compilerSuite, runtimeSuite, physicsSuite, sliSuite, designSuite, sdkSuite, applicationSuite, referenceSuite],
+  [wilSuite, wdlSuite, kernelSuite, graphSuite, compilerSuite, runtimeSuite, physicsSuite, sliSuite, designSuite, sdkSuite, applicationSuite, storageSuite, referenceSuite],
   declaration,
   { now: declaration.generatedAt }
 );
