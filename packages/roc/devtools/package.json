@@ -1,0 +1,28 @@
+{
+  "name": "@roc/devtools",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Developer Tooling (Volume 2100): if the system made a decision, the developer must be able to inspect why. Includes the ROC CLI.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": { "roc": "./dist/bin.js" },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@wge/wil": "workspace:*",
+    "@wge/wdl": "workspace:*",
+    "@wge/compiler": "workspace:*",
+    "@wge/executable": "workspace:*",
+    "@wge/runtime": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22"
+  }
+}

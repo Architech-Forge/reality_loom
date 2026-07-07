@@ -26,6 +26,9 @@ importers:
       '@roc/compliance':
         specifier: workspace:*
         version: link:packages/roc/compliance
+      '@roc/devtools':
+        specifier: workspace:*
+        version: link:packages/roc/devtools
       '@roc/sdk':
         specifier: workspace:*
         version: link:packages/sdk
@@ -158,6 +161,31 @@ importers:
       '@roc/types':
         specifier: workspace:*
         version: link:../types
+
+  packages/roc/devtools:
+    dependencies:
+      '@roc/types':
+        specifier: workspace:*
+        version: link:../types
+      '@wge/compiler':
+        specifier: workspace:*
+        version: link:../../wge/compiler
+      '@wge/executable':
+        specifier: workspace:*
+        version: link:../../wge/executable
+      '@wge/runtime':
+        specifier: workspace:*
+        version: link:../../wge/runtime
+      '@wge/wdl':
+        specifier: workspace:*
+        version: link:../../wge/wdl
+      '@wge/wil':
+        specifier: workspace:*
+        version: link:../../wge/wil
+    devDependencies:
+      '@types/node':
+        specifier: ^22
+        version: 22.20.0
 
   packages/roc/diagnostics:
     dependencies:

@@ -66,6 +66,9 @@
     },
     {
       "path": "packages/roc/ai"
+    },
+    {
+      "path": "packages/roc/devtools"
     }
   ]
 }

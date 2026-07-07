@@ -1,0 +1,59 @@
+# ROC CI Pipeline (TEST-2500.020): broken causality must block the merge.
+name: roc-ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Build packages (Codex order)
+        run: pnpm build
+
+      - name: Unit tests
+        run: pnpm test
+
+      - name: E2E tests
+        run: pnpm test:e2e
+
+      - name: Security tests
+        run: pnpm test:security
+
+      - name: AI boundary tests
+        run: pnpm test:ai
+
+      - name: Reference demo
+        run: pnpm demo
+
+      - name: Compliance gate (REF-1900.021)
+        run: pnpm compliance
+
+      - name: Upload compliance report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: compliance-report
+          path: compliance/reports/compliance-report.json

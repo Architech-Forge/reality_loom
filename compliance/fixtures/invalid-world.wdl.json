@@ -1,0 +1,515 @@
+{
+  "world": {
+    "id": "world_family",
+    "name": "Family Style World",
+    "default_timezone": "America/Denver"
+  },
+  "entities": [
+    {
+      "id": "household_primary",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "The Family"
+          }
+        }
+      ],
+      "type": "household"
+    },
+    {
+      "id": "person_emma",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "Emma"
+          }
+        },
+        {
+          "kind": "permission",
+          "data": {
+            "measurements": "private"
+          },
+          "visibility": {
+            "mode": "restricted",
+            "requiredCapability": "household.measurements.view"
+          }
+        }
+      ],
+      "type": "person"
+    },
+    {
+      "id": "person_james",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "James"
+          }
+        },
+        {
+          "kind": "permission",
+          "data": {
+            "measurements": "private"
+          },
+          "visibility": {
+            "mode": "restricted",
+            "requiredCapability": "household.measurements.view"
+          }
+        }
+      ],
+      "type": "person"
+    },
+    {
+      "id": "person_lila",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "Lila"
+          }
+        },
+        {
+          "kind": "permission",
+          "data": {
+            "measurements": "private"
+          },
+          "visibility": {
+            "mode": "restricted",
+            "requiredCapability": "household.measurements.view"
+          }
+        }
+      ],
+      "type": "person"
+    },
+    {
+      "id": "closet_emma",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "Emma's closet"
+          }
+        }
+      ],
+      "type": "closet"
+    },
+    {
+      "id": "closet_james",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "James's closet"
+          }
+        }
+      ],
+      "type": "closet"
+    },
+    {
+      "id": "closet_lila",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "Lila's closet"
+          }
+        }
+      ],
+      "type": "closet"
+    },
+    {
+      "id": "garment_blue_jacket",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "Blue Jacket"
+          }
+        },
+        {
+          "kind": "application",
+          "data": {
+            "availability.status": "available",
+            "formality": "smart_casual",
+            "waterproof": false
+          }
+        }
+      ],
+      "type": "garment"
+    },
+    {
+      "id": "garment_cream_dress",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "Cream Dress"
+          }
+        },
+        {
+          "kind": "application",
+          "data": {
+            "availability.status": "available",
+            "formality": "formal",
+            "waterproof": false
+          }
+        }
+      ],
+      "type": "garment"
+    },
+    {
+      "id": "garment_gray_suit",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "Gray Suit"
+          }
+        },
+        {
+          "kind": "application",
+          "data": {
+            "availability.status": "available",
+            "formality": "formal",
+            "waterproof": false
+          }
+        }
+      ],
+      "type": "garment"
+    },
+    {
+      "id": "garment_rain_boots",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "Rain Boots"
+          }
+        },
+        {
+          "kind": "application",
+          "data": {
+            "availability.status": "available",
+            "formality": "casual",
+            "waterproof": true
+          }
+        }
+      ],
+      "type": "garment"
+    },
+    {
+      "id": "weather_forecast",
+      "aspects": [
+        {
+          "kind": "state",
+          "data": {
+            "condition": "rain_possible",
+            "confidence": 0.7
+          }
+        }
+      ],
+      "type": "weather"
+    },
+    {
+      "id": "event_wedding",
+      "aspects": [
+        {
+          "kind": "state",
+          "data": {
+            "kind": "wedding_rehearsal_dinner",
+            "formality": "formal"
+          }
+        }
+      ],
+      "type": "event"
+    },
+    {
+      "id": "bird_guide",
+      "aspects": [
+        {
+          "kind": "identity",
+          "data": {
+            "display_name": "Birdi"
+          }
+        },
+        {
+          "kind": "capability",
+          "data": {
+            "guides": true
+          }
+        }
+      ],
+      "type": "bird"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "rel_world_family_root__contains__household_primary",
+      "from": "world_family_root",
+      "type": "contains",
+      "to": "household_primary",
+      "weight": 100
+    },
+    {
+      "id": "rel_household_primary__includes_person__person_emma",
+      "from": "household_primary",
+      "type": "includes_person",
+      "to": "person_emma",
+      "weight": 100,
+      "confidence": 1
+    },
+    {
+      "id": "rel_household_primary__includes_person__person_james",
+      "from": "household_primary",
+      "type": "includes_person",
+      "to": "person_james",
+      "weight": 100,
+      "confidence": 1
+    },
+    {
+      "id": "rel_household_primary__includes_person__person_lila",
+      "from": "household_primary",
+      "type": "includes_person",
+      "to": "person_lila",
+      "weight": 100,
+      "confidence": 1
+    },
+    {
+      "id": "rel_person_emma__owns__closet_emma",
+      "from": "person_emma",
+      "type": "owns",
+      "to": "closet_emma",
+      "weight": 100
+    },
+    {
+      "id": "rel_person_james__owns__closet_james",
+      "from": "person_james",
+      "type": "owns",
+      "to": "closet_james",
+      "weight": 100
+    },
+    {
+      "id": "rel_person_lila__owns__closet_lila",
+      "from": "person_lila",
+      "type": "owns",
+      "to": "closet_lila",
+      "weight": 100
+    },
+    {
+      "id": "rel_closet_emma__contains__garment_blue_jacket",
+      "from": "closet_emma",
+      "type": "contains",
+      "to": "garment_blue_jacket"
+    },
+    {
+      "id": "rel_closet_emma__contains__garment_cream_dress",
+      "from": "closet_emma",
+      "type": "contains",
+      "to": "garment_cream_dress"
+    },
+    {
+      "id": "rel_closet_james__contains__garment_gray_suit",
+      "from": "closet_james",
+      "type": "contains",
+      "to": "garment_gray_suit"
+    },
+    {
+      "id": "rel_closet_lila__contains__garment_rain_boots",
+      "from": "closet_lila",
+      "type": "contains",
+      "to": "garment_rain_boots"
+    },
+    {
+      "id": "rel_weather_forecast__influences__garment_rain_boots",
+      "from": "weather_forecast",
+      "type": "influences",
+      "to": "garment_rain_boots",
+      "weight": 78,
+      "confidence": 0.92
+    },
+    {
+      "id": "rel_event_wedding__requires__garment_cream_dress",
+      "from": "event_wedding",
+      "type": "requires",
+      "to": "garment_cream_dress",
+      "weight": 60
+    },
+    {
+      "id": "rel_event_wedding__requires__garment_gray_suit",
+      "from": "event_wedding",
+      "type": "requires",
+      "to": "garment_gray_suit",
+      "weight": 60
+    },
+    {
+      "id": "rel_household_primary__references__event_wedding",
+      "from": "household_primary",
+      "type": "references",
+      "to": "event_wedding"
+    },
+    {
+      "id": "rel_household_primary__references__weather_forecast",
+      "from": "household_primary",
+      "type": "references",
+      "to": "weather_forecast"
+    },
+    {
+      "id": "rel_bird_guide__guides__person_emma",
+      "from": "bird_guide",
+      "type": "guides",
+      "to": "person_emma",
+      "weight": 50,
+      "confidence": 0.9
+    },
+    {
+      "id": "rel_world_family_root__contains__bird_guide",
+      "from": "world_family_root",
+      "type": "contains",
+      "to": "bird_guide"
+    },
+    {
+      "from": "person_ghost",
+      "type": "owns",
+      "to": "closet_emma"
+    }
+  ],
+  "laws": [
+    {
+      "metadata": {
+        "explanation": "Unavailable garments cannot be recommended as wearable today."
+      },
+      "id": "law_garment_available",
+      "name": "Garments must be available before recommendation",
+      "scope": "world",
+      "appliesTo": {
+        "kind": "type",
+        "value": "garment"
+      },
+      "condition": {
+        "op": "equals",
+        "left": {
+          "kind": "path",
+          "path": "aspects.application.availability.status"
+        },
+        "right": {
+          "kind": "literal",
+          "value": "available"
+        }
+      },
+      "outcome": "reject",
+      "severity": "error"
+    },
+    {
+      "metadata": {
+        "explanation": "Measurements are private; viewing them requires household permission."
+      },
+      "id": "law_measurements_private",
+      "name": "Private measurements cannot be projected without permission",
+      "scope": "world",
+      "appliesTo": {
+        "kind": "type",
+        "value": "person"
+      },
+      "condition": {
+        "op": "has_authority",
+        "actorRef": {
+          "kind": "actor",
+          "field": "id"
+        },
+        "capability": "household.measurements.view"
+      },
+      "outcome": "reject",
+      "severity": "error"
+    },
+    {
+      "metadata": {
+        "explanation": "An outfit plan enters Reality only after the family accepts it."
+      },
+      "id": "law_candidate_acceptance",
+      "name": "Candidate outfits do not become Reality until accepted",
+      "scope": "world",
+      "appliesTo": {
+        "kind": "type",
+        "value": "outfit_plan"
+      },
+      "condition": {
+        "op": "any",
+        "conditions": [
+          {
+            "op": "equals",
+            "left": {
+              "kind": "path",
+              "path": "aspects.state.status"
+            },
+            "right": {
+              "kind": "literal",
+              "value": "accepted"
+            }
+          },
+          {
+            "op": "contains",
+            "left": {
+              "kind": "context",
+              "key": "candidateWorldId"
+            },
+            "right": {
+              "kind": "literal",
+              "value": "cw_"
+            }
+          }
+        ]
+      },
+      "outcome": "reject",
+      "severity": "error"
+    }
+  ],
+  "traversals": [
+    {
+      "rules": [
+        {
+          "follow": "includes_person",
+          "collect": {
+            "kind": "type",
+            "value": "person"
+          }
+        },
+        {
+          "follow": "owns",
+          "collect": {
+            "kind": "type",
+            "value": "closet"
+          }
+        },
+        {
+          "follow": "contains",
+          "collect": {
+            "kind": "type",
+            "value": "garment"
+          }
+        }
+      ],
+      "apply": [
+        "law_garment_available"
+      ],
+      "id": "traversal_coordinate_group_style",
+      "from": "household_primary",
+      "output": {
+        "kind": "entities",
+        "orderBy": "id"
+      }
+    }
+  ],
+  "objectives": [
+    {
+      "id": "objective_plan_family_look",
+      "label": "Plan a coordinated family look for the wedding rehearsal dinner",
+      "entry": "household_primary",
+      "traversal": "traversal_coordinate_group_style",
+      "kind": "planning",
+      "priority": 85
+    }
+  ],
+  "constraints": []
+}

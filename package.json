@@ -16,7 +16,11 @@
     "test": "vitest run",
     "test:e2e": "vitest run e2e",
     "compliance": "tsx scripts/compliance.ts",
-    "demo": "tsx scripts/demo.ts"
+    "demo": "tsx scripts/demo.ts",
+    "test:security": "vitest run e2e/security",
+    "test:ai": "vitest run e2e/ai",
+    "demo:test": "vitest run e2e/demo",
+    "roc": "tsx packages/roc/devtools/src/bin.ts"
   },
   "devDependencies": {
     "@eslint/js": "^9.20.0",
@@ -46,6 +50,7 @@
     "@roc/app-integration": "workspace:*",
     "@roc/storage": "workspace:*",
     "@roc/security": "workspace:*",
-    "@roc/ai": "workspace:*"
+    "@roc/ai": "workspace:*",
+    "@roc/devtools": "workspace:*"
   }
 }

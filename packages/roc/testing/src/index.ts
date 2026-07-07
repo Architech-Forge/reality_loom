@@ -165,3 +165,5 @@ export class ProjectionTestHarness {
     return Object.fromEntries(output.composition.entities.map((e) => [e.entityId, e.reason]));
   }
 }
+
+export { SemanticAssertions } from "./assertions.js";

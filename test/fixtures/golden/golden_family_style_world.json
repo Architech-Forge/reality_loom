@@ -1,0 +1,21 @@
+{
+  "id": "golden_family_style_world",
+  "specVersion": "1.0.0",
+  "description": "The Reference Family Style World (REF-1900.018) compiled with a fixed clock must always produce these canonical hashes. Golden Fixtures are executable specification examples (TEST-2500.003).",
+  "input": {
+    "source": "@examples/family-style-world",
+    "now": "2026-07-06T12:00:00Z"
+  },
+  "expected": {
+    "worldId": "world_family",
+    "initialSnapshotId": "snap_world_family__initial",
+    "entityIndexHash": "2707382f50c527cf56213ab3b0d685afbbc558289460b574be792caac506062a",
+    "relationshipIndexHash": "fe015f990e1ff7512bfe45fb9610a36cf388cbdcc0a818860423a5c5216da7b2",
+    "lawIndexHash": "83bb18c4e43c00ae9e3ea1463c7e609bec35bdf5759b4343a99c12db1e2ac2fe",
+    "entityCount": 16
+  },
+  "semanticAssertions": [
+    { "id": "sa_1", "description": "compile output is deterministic", "target": "compiler_output", "assertionType": "is_deterministic" },
+    { "id": "sa_2", "description": "identity preserved through compilation", "target": "world", "assertionType": "preserves_identity" }
+  ]
+}

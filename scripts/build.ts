@@ -33,6 +33,7 @@ const BUILD_ORDER: string[] = [
   "packages/roc/storage", // Vol 2200 — Storage And Persistence
   "packages/roc/security", // Vol 2300 — Security And Permissions
   "packages/roc/ai", // Vol 2400 — AI And Reasoning
+  "packages/roc/devtools", // Vol 2100 — Developer Tooling
   "examples/family-style-world", // 17. Reference applications
   "apps/reference-demo" // 17. Reference applications
 ];
