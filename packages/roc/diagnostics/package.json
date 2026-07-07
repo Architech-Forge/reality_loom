@@ -1,0 +1,19 @@
+{
+  "name": "@roc/diagnostics",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Diagnostic creation and collection (WGE-1000.012 required diagnostics). Build order position 2.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*"
+  }
+}

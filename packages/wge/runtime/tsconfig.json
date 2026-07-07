@@ -1,0 +1,33 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": [
+    "src"
+  ],
+  "references": [
+    {
+      "path": "../../roc/types"
+    },
+    {
+      "path": "../../roc/diagnostics"
+    },
+    {
+      "path": "../wil"
+    },
+    {
+      "path": "../kernel"
+    },
+    {
+      "path": "../graph"
+    },
+    {
+      "path": "../executable"
+    },
+    {
+      "path": "../physics"
+    }
+  ]
+}

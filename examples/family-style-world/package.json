@@ -1,0 +1,21 @@
+{
+  "name": "@examples/family-style-world",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reference Family Style World (REF-1900.018): the first end-to-end ROC demo world, authored with the SDK builders.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@roc/sdk": "workspace:*",
+    "@wge/wdl": "workspace:*"
+  }
+}

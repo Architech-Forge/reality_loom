@@ -1,0 +1,25 @@
+{
+  "name": "@wge/wil",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal WIL implementation (REF-1900.005): message construction, validation, outcomes, traces, canonical JSON. Build order position 3.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@roc/diagnostics": "workspace:*",
+    "@roc/types": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22"
+  }
+}

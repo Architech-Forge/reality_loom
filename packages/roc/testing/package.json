@@ -1,0 +1,24 @@
+{
+  "name": "@roc/testing",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Runtime and Projection test harnesses (SDK-1800.017 – SDK-1800.019). Build order position 14.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@wge/wil": "workspace:*",
+    "@wge/compiler": "workspace:*",
+    "@wge/executable": "workspace:*",
+    "@wge/runtime": "workspace:*",
+    "@sli/runtime": "workspace:*"
+  }
+}

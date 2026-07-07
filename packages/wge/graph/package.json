@@ -1,0 +1,22 @@
+{
+  "name": "@wge/graph",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal in-memory World Graph (REF-1900.007, Volume 1100). Build order position 5.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@roc/diagnostics": "workspace:*",
+    "@wge/wil": "workspace:*",
+    "@wge/kernel": "workspace:*"
+  }
+}

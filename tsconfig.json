@@ -1,0 +1,56 @@
+{
+  "files": [],
+  "references": [
+    {
+      "path": "packages/roc/types"
+    },
+    {
+      "path": "packages/roc/diagnostics"
+    },
+    {
+      "path": "packages/wge/wil"
+    },
+    {
+      "path": "packages/wge/kernel"
+    },
+    {
+      "path": "packages/wge/graph"
+    },
+    {
+      "path": "packages/wge/wdl"
+    },
+    {
+      "path": "packages/wge/executable"
+    },
+    {
+      "path": "packages/wge/compiler"
+    },
+    {
+      "path": "packages/wge/physics"
+    },
+    {
+      "path": "packages/wge/runtime"
+    },
+    {
+      "path": "packages/sli/renderer-contract"
+    },
+    {
+      "path": "packages/sli/design-system"
+    },
+    {
+      "path": "packages/sli/runtime"
+    },
+    {
+      "path": "packages/roc/testing"
+    },
+    {
+      "path": "packages/sdk"
+    },
+    {
+      "path": "examples/family-style-world"
+    },
+    {
+      "path": "apps/reference-demo"
+    }
+  ]
+}

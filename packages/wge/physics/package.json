@@ -1,0 +1,22 @@
+{
+  "name": "@wge/physics",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal World Physics (REF-1900.013, Volume 1400): changes ripple, they do not explode. Build order position 9.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@wge/wil": "workspace:*",
+    "@wge/kernel": "workspace:*",
+    "@wge/graph": "workspace:*"
+  }
+}

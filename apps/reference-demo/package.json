@@ -1,0 +1,24 @@
+{
+  "name": "@apps/reference-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "First End-To-End Demo (REF-1900.019): proves the platform loop from WDL definition to accessible projection.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@roc/sdk": "workspace:*",
+    "@examples/family-style-world": "workspace:*",
+    "@wge/runtime": "workspace:*",
+    "@sli/runtime": "workspace:*",
+    "@sli/renderer-contract": "workspace:*"
+  }
+}

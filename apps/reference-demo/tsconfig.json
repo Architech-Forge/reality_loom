@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../../packages/roc/types" },
+    { "path": "../../packages/sdk" },
+    { "path": "../../examples/family-style-world" },
+    { "path": "../../packages/wge/runtime" },
+    { "path": "../../packages/sli/runtime" },
+    { "path": "../../packages/sli/renderer-contract" }
+  ]
+}

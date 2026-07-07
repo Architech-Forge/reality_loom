@@ -1,0 +1,19 @@
+{
+  "name": "@sli/renderer-contract",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Renderer Adapter Contract (SLI-1500.012): renderers express Projection, they do not reinterpret Reality. Build order position 11.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "name": "@wge/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal WGE Runtime (REF-1900.011, Volume 1300): a causality engine for Worlds \u2014 observe/simulate/commit, transactions, laws, diffs, snapshots, candidates, traces.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@roc/diagnostics": "workspace:*",
+    "@wge/wil": "workspace:*",
+    "@wge/kernel": "workspace:*",
+    "@wge/graph": "workspace:*",
+    "@wge/executable": "workspace:*",
+    "@wge/physics": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "^22",
+    "@wge/compiler": "workspace:*",
+    "@wge/wdl": "workspace:*"
+  }
+}

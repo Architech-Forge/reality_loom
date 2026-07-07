@@ -1,0 +1,19 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../roc/types" },
+    { "path": "../roc/diagnostics" },
+    { "path": "../wge/wil" },
+    { "path": "../wge/wdl" },
+    { "path": "../wge/kernel" },
+    { "path": "../wge/compiler" },
+    { "path": "../wge/executable" },
+    { "path": "../wge/runtime" },
+    { "path": "../sli/runtime" }
+  ]
+}

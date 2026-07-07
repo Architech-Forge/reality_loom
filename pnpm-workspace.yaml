@@ -1,0 +1,7 @@
+packages:
+  - "packages/roc/*"
+  - "packages/wge/*"
+  - "packages/sli/*"
+  - "packages/sdk"
+  - "apps/*"
+  - "examples/*"

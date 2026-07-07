@@ -1,0 +1,28 @@
+{
+  "name": "@sli/runtime",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal SLI Runtime (REF-1900.016, Volume 1500): projects Worlds into human experiences without mutating Reality. Build order position 13.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@wge/wil": "workspace:*",
+    "@sli/renderer-contract": "workspace:*",
+    "@sli/design-system": "workspace:*"
+  },
+  "devDependencies": {
+    "@wge/compiler": "workspace:*",
+    "@wge/executable": "workspace:*",
+    "@wge/runtime": "workspace:*",
+    "@wge/wdl": "workspace:*"
+  }
+}

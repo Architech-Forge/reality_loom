@@ -1,0 +1,30 @@
+{
+  "name": "the-reality-loom",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Reality Loom \u2014 Reference Implementation of Reality-Oriented Computing (ROC): WIL, WDL, WGE, SLI, SDK.",
+  "type": "module",
+  "engines": {
+    "node": ">=22",
+    "pnpm": ">=9"
+  },
+  "packageManager": "pnpm@9.15.0",
+  "scripts": {
+    "build": "tsx scripts/build.ts",
+    "typecheck": "tsc -b",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:e2e": "vitest run e2e",
+    "compliance": "tsx scripts/compliance.ts",
+    "demo": "tsx scripts/demo.ts"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.20.0",
+    "@types/node": "^22",
+    "eslint": "^9.20.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.24.0",
+    "vitest": "^3.0.0"
+  }
+}

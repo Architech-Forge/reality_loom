@@ -1,0 +1,16 @@
+{
+  "extends": "../../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist"
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../types" },
+    { "path": "../../wge/wil" },
+    { "path": "../../wge/compiler" },
+    { "path": "../../wge/executable" },
+    { "path": "../../wge/runtime" },
+    { "path": "../../sli/runtime" }
+  ]
+}

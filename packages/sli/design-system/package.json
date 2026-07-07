@@ -1,0 +1,19 @@
+{
+  "name": "@sli/design-system",
+  "version": "0.1.0",
+  "private": true,
+  "description": "SLI Design System (Volume 1600): renderer-agnostic experience rules — regions, roles, workspaces, tokens, patterns, extensions. Build order position 12.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*"
+  }
+}

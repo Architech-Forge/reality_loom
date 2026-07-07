@@ -1,0 +1,25 @@
+{
+  "name": "@wge/compiler",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal World Compiler (REF-1900.009, Volume 1200): WDL JSON / WIL import → validated World → Executable World.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@roc/diagnostics": "workspace:*",
+    "@wge/wil": "workspace:*",
+    "@wge/kernel": "workspace:*",
+    "@wge/graph": "workspace:*",
+    "@wge/wdl": "workspace:*",
+    "@wge/executable": "workspace:*"
+  }
+}
