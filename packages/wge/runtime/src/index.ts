@@ -21,3 +21,20 @@ export {
 export { applyDiffOperations, type ApplyDiffResult } from "./apply-diff.js";
 export { executeTraversal, type ExecuteTraversalInput } from "./traversal.js";
 export { interpretIntent, affectedEntityIds, type IntentInterpretation } from "./intent.js";
+
+// REF-1900.012 — Minimal Transaction Function. The transaction pipeline
+// (open → validate → laws → diff → snapshot → outcome) lives inside
+// WGERuntime.commit; this spec-named form executes one commit transaction.
+import type { WILMessage as _WILMessage, WGERuntimeOutput as _WGERuntimeOutput } from "@roc/types";
+import type { WGERuntime as _WGERuntime } from "./runtime.js";
+
+export interface WGETransactionInput {
+  runtime: _WGERuntime;
+  message: _WILMessage;
+}
+
+export async function executeCommitTransaction(
+  input: WGETransactionInput
+): Promise<_WGERuntimeOutput> {
+  return input.runtime.commit(input.message);
+}

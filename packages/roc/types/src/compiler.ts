@@ -165,3 +165,36 @@ export interface WGEPhysicsPlan {
 
 /** WGE-1200.019 — Compiler Profiles. Profiles never change World meaning. */
 export type WGECompilerProfile = "development" | "production" | "ai_authoring" | "embedded";
+
+/**
+ * WGE-1200.018 — Compiler Plugins (contract; plugin execution arrives with
+ * the tooling phase). Plugins MUST NOT override Kernel invariants, suppress
+ * fatal errors, or produce nondeterministic output.
+ */
+export type WGECompilerHook = (context: Record<string, unknown>) => Promise<void> | void;
+
+export interface WGECompilerPlugin {
+  id: string;
+  version: string;
+
+  hooks: {
+    beforeValidation?: WGECompilerHook;
+    afterValidation?: WGECompilerHook;
+    beforeWirGeneration?: WGECompilerHook;
+    afterWirGeneration?: WGECompilerHook;
+    beforeExecutableGeneration?: WGECompilerHook;
+  };
+
+  metadata?: Record<string, unknown>;
+}
+
+/**
+ * WGE-1200.016 — Incremental Compilation input (contract; the reference
+ * compiler falls back to full compilation per the safety rule).
+ */
+export interface WGEIncrementalCompileInput {
+  previousExecutableWorldId: string;
+  previousSnapshotId?: string;
+  changedSourceUnits: WGESourceUnit[];
+  changedSemanticOperations?: WGESemanticOperation[];
+}

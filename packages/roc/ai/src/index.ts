@@ -684,3 +684,101 @@ export function refuse(
     traceId: request.traceId
   };
 }
+
+/** AI-2400.004 — spec-named observation request alias for candidate generation. */
+export interface ROCAICandidateWorldRequest {
+  requestId: string;
+
+  aiActorId: string;
+
+  baseWorldId: string;
+  baseSnapshotId: string;
+
+  objectiveId: string;
+
+  goal: string;
+
+  constraints: ROCAIReasoningConstraint[];
+
+  traceId: string;
+}
+
+/** SEC-2300.007 / AI-2400 — AI Interaction record. */
+export interface ROCAIInteractionRecord {
+  interactionId: string;
+
+  aiActorId: string;
+
+  delegatedFromActorId?: string;
+
+  worldId: string;
+
+  messageId?: string;
+  traceId: string;
+
+  action: "observe" | "explain" | "simulate" | "propose" | "summarize" | "project_hint" | "commit_request";
+
+  confidence?: number;
+
+  createdAt: WGETimestamp;
+
+  metadata?: Record<string, unknown>;
+}
+
+/** AI-2400.012 — Explanation output. If it cannot be traced, AI must not pretend to know it. */
+export interface ROCAIExplanation {
+  explanationId: string;
+
+  audience: "user" | "developer" | "admin" | "auditor" | "ai_agent";
+
+  summary: string;
+
+  supportingTraceIds: string[];
+
+  facts: string[];
+
+  inferences: string[];
+
+  uncertainties: ROCAIUncertainty[];
+
+  redacted: boolean;
+
+  traceId: string;
+}
+
+/** AI-2400.015 — Tool Use Through WIL. AI tools are not backdoors around the World. */
+export interface ROCAIToolRequest {
+  toolRequestId: string;
+
+  aiActorId: string;
+
+  toolId: string;
+
+  worldId?: string;
+  snapshotId?: string;
+
+  purpose: string;
+
+  proposedWILMessage?: WILMessage;
+
+  requiresConfirmation: boolean;
+
+  traceId: string;
+
+  metadata?: Record<string, unknown>;
+}
+
+/** AI-2400.017 — AI Projection Hint: may influence experience, never own projection. */
+export interface ROCAIProjectionHint extends ROCProjectionHint {
+  generatedByAIActorId: string;
+
+  confidence: number;
+
+  explanation: string;
+
+  assumptions: ROCAIAssumption[];
+
+  uncertainty: ROCAIUncertainty[];
+
+  expiresAt?: WGETimestamp;
+}

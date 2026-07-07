@@ -453,3 +453,108 @@ export class SecurityKernel {
     });
   }
 }
+
+/** SEC-2300.009 — Relationship Visibility. Connections can be as sensitive as Entities. */
+export interface ROCRelationshipVisibility {
+  relationshipId: string;
+
+  visibility: "public" | "world" | "shared" | "private" | "restricted" | "hidden";
+
+  visibleToActorIds?: string[];
+  visibleToScopes?: string[];
+
+  redactionStrategy?: "hide_relationship" | "hide_target" | "hide_source" | "hide_type" | "summarize";
+
+  metadata?: Record<string, unknown>;
+}
+
+/** SEC-2300.010 — Aspect Privacy. Meaning can be private even when identity is visible. */
+export interface ROCFieldPrivacyPolicy {
+  visibility: "public" | "owner" | "delegated" | "admin" | "system";
+
+  redactAs?: "hidden" | "summary" | "range" | "boolean" | "placeholder";
+}
+
+export interface ROCAspectPrivacy {
+  aspectId: string;
+
+  sensitivity: "public" | "internal" | "private" | "sensitive" | "regulated" | "secret";
+
+  fieldPolicies?: Record<string, ROCFieldPrivacyPolicy>;
+
+  encryptionRequired?: boolean;
+
+  redactionRequired?: boolean;
+
+  metadata?: Record<string, unknown>;
+}
+
+/** SEC-2300.012 — World Scope Security. World boundaries are security boundaries. */
+export interface ROCWorldScope {
+  worldId: string;
+
+  ownerActorId?: string;
+  ownerOrganizationId?: string;
+  ownerHouseholdId?: string;
+  applicationId?: string;
+
+  visibility: "public" | "private" | "shared" | "organization" | "household" | "system";
+
+  allowedActorIds?: string[];
+  allowedScopes?: string[];
+
+  metadata?: Record<string, unknown>;
+}
+
+/** SEC-2300.015 — Storage Access Security input. */
+export interface ROCStorageAccessInput {
+  actorId: string;
+
+  store:
+    | "world"
+    | "entity"
+    | "relationship"
+    | "aspect"
+    | "snapshot"
+    | "diff"
+    | "event"
+    | "transaction"
+    | "trace"
+    | "candidate"
+    | "projection"
+    | "index";
+
+  action: "read" | "write" | "delete" | "archive" | "restore";
+
+  targetId: string;
+
+  worldId?: string;
+
+  traceId: string;
+}
+
+/**
+ * SEC-2300.016 — Federated Access record (contract; federation behavior
+ * arrives with the federation phase). Permission in one World does not
+ * imply permission in another.
+ */
+export interface ROCFederatedAccessRecord {
+  accessId: string;
+
+  actorId: string;
+
+  sourceWorldId: string;
+  targetWorldId: string;
+
+  relationshipId?: string;
+
+  action: "observe" | "traverse" | "propagate" | "project" | "commit_request";
+
+  allowed: boolean;
+
+  reason: string;
+
+  traceId: string;
+
+  createdAt: WGETimestamp;
+}

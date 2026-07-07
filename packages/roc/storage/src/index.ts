@@ -7,4 +7,4 @@
  * semantic guarantee is enforced by the adapter itself.
  */
 export * from "./records.js";
-export { ReferenceStorageAdapter, StorageViolation, type StorageBundle } from "./adapter.js";
+export { ReferenceStorageAdapter, StorageViolation, type StorageBundle, type ROCStorageAdapter } from "./adapter.js";

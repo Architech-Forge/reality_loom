@@ -12,7 +12,8 @@ export {
   RelationshipBuilder,
   LawBuilder,
   TraversalBuilder,
-  WILBuilder
+  WILBuilder,
+  type WorldBuilderResult
 } from "./builders.js";
 export { Cond } from "./conditions.js";
 export {
@@ -20,7 +21,12 @@ export {
   createRuntimeClient,
   createProjectionClient,
   createCandidateClient,
-  type CompilerClientInput
+  type CompilerClientInput,
+  type WGECompilerClient,
+  type WGERuntimeClient,
+  type SLIProjectionClient,
+  type WGECandidateWorldClient,
+  type WGECandidateComparison
 } from "./clients.js";
 export { ROCSDKError, type ROCSDKErrorInput } from "./errors.js";
 

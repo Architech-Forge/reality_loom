@@ -93,20 +93,22 @@ export interface ROCComplianceTest {
   run(context: ROCComplianceContext): Promise<ROCComplianceResult>;
 }
 
+export type ROCComplianceFixtureType =
+  | "wil_message"
+  | "wdl_source"
+  | "world_definition"
+  | "executable_world"
+  | "snapshot"
+  | "diff"
+  | "trace"
+  | "candidate_world"
+  | "projection_input"
+  | "projection_output"
+  | "application_adapter";
+
 export interface ROCComplianceFixture<T = unknown> {
   id: string;
-  type:
-    | "wil_message"
-    | "wdl_source"
-    | "world_definition"
-    | "executable_world"
-    | "snapshot"
-    | "diff"
-    | "trace"
-    | "candidate_world"
-    | "projection_input"
-    | "projection_output"
-    | "application_adapter";
+  type: ROCComplianceFixtureType;
   specVersion: string;
   data: T;
   expectedBehavior?: Record<string, unknown>;

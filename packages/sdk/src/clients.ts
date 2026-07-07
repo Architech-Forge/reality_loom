@@ -32,7 +32,48 @@ export interface CompilerClientInput {
   now?: string;
 }
 
-export function createCompilerClient() {
+/** SDK-1800.011 — spec-named client interface. */
+export interface WGECompilerClient {
+  compile(input: CompilerClientInput): Promise<WGECompileResult>;
+  compileIncremental(input: CompilerClientInput): Promise<WGECompileResult>;
+  validate(input: CompilerClientInput): Promise<WGEValidationResult>;
+}
+
+/** SDK-1800.012 — spec-named client interface. */
+export interface WGERuntimeClient {
+  observe(message: WILMessage): Promise<WGERuntimeOutput>;
+  simulate(message: WILMessage): Promise<WGERuntimeOutput>;
+  commit(message: WILMessage): Promise<WGERuntimeOutput>;
+  getSnapshot(worldId: string): Promise<WGESnapshot>;
+  getTrace(traceId: string): Promise<WILTrace>;
+  replay(): Promise<never>;
+}
+
+/** SDK-1800.013 — spec-named client interface. */
+export interface SLIProjectionClient {
+  project(input: SLIProjectionInput): Promise<SLIProjectionOutput>;
+  recompose(input: SLIRecompositionInput): Promise<SLIProjectionOutput>;
+  explainProjection(projectionId: string): Promise<Record<string, string>>;
+}
+
+/** SDK-1800.015 — Candidate comparison output (spec: WGECandidateComparison). */
+export interface WGECandidateComparison {
+  equivalent: boolean;
+  candidateSnapshotId: string;
+  realitySnapshotId: string;
+  operationCount: number;
+}
+
+/** SDK-1800.015 — spec-named client interface. */
+export interface WGECandidateWorldClient {
+  createCandidateWorld(message: WILMessage): Promise<WGERuntimeOutput>;
+  modifyCandidateWorld(message: WILMessage): Promise<WGERuntimeOutput>;
+  compareCandidateToReality(candidateWorldId: string): WGECandidateComparison | undefined;
+  prepareMerge(candidateWorldId: string, actor: WILActor, context: WILContext): WILMessage;
+  discard(candidateWorldId: string): boolean;
+}
+
+export function createCompilerClient(): WGECompilerClient {
   const compileOne = async (input: CompilerClientInput): Promise<WGECompileResult> => {
     const source = input.sources[0];
     if (!source) {
@@ -78,7 +119,7 @@ export function createCompilerClient() {
 }
 
 /** SDK-1800.012 — Runtime Client. */
-export function createRuntimeClient(runtime: WGERuntime) {
+export function createRuntimeClient(runtime: WGERuntime): WGERuntimeClient {
   return {
     observe: (message: WILMessage): Promise<WGERuntimeOutput> => runtime.observe(message),
     simulate: (message: WILMessage): Promise<WGERuntimeOutput> => runtime.simulate(message),
@@ -122,7 +163,7 @@ export function createRuntimeClient(runtime: WGERuntime) {
 }
 
 /** SDK-1800.013 — Projection Client. Projection is experience, not Reality. */
-export function createProjectionClient() {
+export function createProjectionClient(): SLIProjectionClient {
   const outputs = new Map<string, SLIProjectionOutput>();
   return {
     async project(input: SLIProjectionInput): Promise<SLIProjectionOutput> {
@@ -152,7 +193,7 @@ export function createProjectionClient() {
 }
 
 /** SDK-1800.015 — Candidate World SDK. Possible Worlds remain possible until committed. */
-export function createCandidateClient(runtime: WGERuntime) {
+export function createCandidateClient(runtime: WGERuntime): WGECandidateWorldClient {
   return {
     createCandidateWorld: (message: WILMessage): Promise<WGERuntimeOutput> =>
       runtime.simulate(message),

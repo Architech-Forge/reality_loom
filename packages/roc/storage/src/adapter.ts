@@ -403,3 +403,28 @@ export class ReferenceStorageAdapter {
 }
 
 export type { StorageBundle };
+
+/**
+ * STORE-2200.017 — spec-named Storage Adapter contract (implemented by
+ * ReferenceStorageAdapter). Database choice must not change World behavior.
+ */
+export interface ROCStorageAdapter {
+  id: string;
+  version: string;
+
+  capabilities: ROCStorageCapabilities;
+
+  putWorld(record: WGEWorldStoreRecord): void;
+  getWorld(worldId: string): WGEWorldStoreRecord | undefined;
+  putSnapshot(record: WGESnapshotStoreRecord): void;
+  getSnapshot(snapshotId: string): WGESnapshotStoreRecord | undefined;
+  putDiff(record: WGEDiffStoreRecord): void;
+  getDiff(diffId: string): WGEDiffStoreRecord | undefined;
+  appendEvent(record: WGEEventLogRecord): number;
+  putTransaction(record: WGETransactionStoreRecord): void;
+  getTransaction(transactionId: string): WGETransactionStoreRecord | undefined;
+  putTrace(record: ROCTraceStoreRecord): void;
+  getTrace(traceId: string, actor: WILActor): ROCTraceStoreRecord | undefined;
+  putCandidate(record: WGECandidateWorldStoreRecord): void;
+  getCandidate(candidateWorldId: string): WGECandidateWorldStoreRecord | undefined;
+}

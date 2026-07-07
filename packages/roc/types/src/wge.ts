@@ -561,3 +561,45 @@ export const WGE_LAW_OUTCOMES: readonly WGELawOutcome[] = [
   "require_clarification",
   "create_candidate_world"
 ] as const;
+
+/** WGE-1100.003 — Entity Graph node form. */
+export interface WGEEntityNode {
+  id: WGEID;
+  worldId: WGEID;
+  type: string;
+  lifecycle: WGEEntityLifecycle;
+  aspectIds: WGEID[];
+  version: number;
+  metadata?: Record<string, unknown>;
+}
+
+/** WGE-1100.004 — Relationship Graph edge form. */
+export interface WGERelationshipEdge {
+  id: WGEID;
+  worldId: WGEID;
+
+  fromEntityId: WGEID;
+  toEntityId: WGEID;
+
+  type: string;
+  direction: "directed" | "bidirectional";
+
+  weight?: Weight;
+  confidence?: Confidence;
+
+  lifecycle: WGERelationshipLifecycle;
+
+  aspectIds?: WGEID[];
+  metadata?: Record<string, unknown>;
+}
+
+/** WGE-1100.005 — Aspect Graph node form. */
+export interface WGEAspectNode {
+  id: WGEID;
+  worldId: WGEID;
+  ownerId: WGEID;
+  kind: string;
+  data: Record<string, unknown>;
+  version: number;
+  metadata?: Record<string, unknown>;
+}

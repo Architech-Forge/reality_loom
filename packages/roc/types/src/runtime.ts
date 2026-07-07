@@ -10,10 +10,12 @@
 import type { WGETimestamp } from "./primitives.js";
 import type {
   WGEDiff,
+  WGEDiffOperation,
   WGEEvent,
   WGESelector,
   WGESnapshot
 } from "./wge.js";
+import type { WGEPhysicsBlockedPath, WGEPhysicsEvent } from "./physics.js";
 import type {
   WILContext,
   WILExecutionMode,
@@ -247,6 +249,65 @@ export interface WGETraversalRuntimeOutput {
   traceSteps: WILTraceStep[];
 
   diagnostics?: WGERuntimeDiagnostic[];
+}
+
+/** WGE-1300.009 — Physics Runtime input/output (spec-named forms). */
+export interface WGEPhysicsRuntimeInput {
+  worldId: string;
+  snapshotId: string;
+  event: WGEPhysicsEvent;
+  proposedDiff?: WGEDiff;
+  physicsPlanId?: string;
+  context: WILContext;
+}
+
+export interface WGEPhysicsRuntimeOutput {
+  affectedEntityIds: string[];
+  affectedRelationshipIds: string[];
+
+  generatedDiffOperations: WGEDiffOperation[];
+
+  blockedPaths: WGEPhysicsBlockedPath[];
+
+  traceSteps: WILTraceStep[];
+
+  diagnostics?: WGERuntimeDiagnostic[];
+}
+
+/** WGE-1300.011 — Diff Generation Runtime input. */
+export interface WGEDiffGenerationInput {
+  worldId: string;
+  baseSnapshotId: string;
+  actorId: string;
+  messageId: string;
+  traceId: string;
+  semanticChange: Record<string, unknown>;
+  physicsEffects?: WGEPhysicsRuntimeOutput;
+}
+
+/** WGE-1300.012 — Snapshot Commit Runtime input/output. */
+export interface WGESnapshotCommitInput {
+  worldId: string;
+  transactionId: string;
+  baseSnapshotId: string;
+  diff: WGEDiff;
+  traceId: string;
+}
+
+export interface WGESnapshotCommitOutput {
+  snapshot: WGESnapshot;
+  committedDiff: WGEDiff;
+  outcome: WILOutcome;
+  traceSteps: WILTraceStep[];
+}
+
+/** WGE-1300.014 — Candidate World Merge input. */
+export interface WGECandidateWorldMergeInput {
+  candidateWorldId: string;
+  targetRealitySnapshotId: string;
+  actorId: string;
+  messageId: string;
+  traceId: string;
 }
 
 /** Trace bundle every runtime execution persists (WGE-1300.004). */

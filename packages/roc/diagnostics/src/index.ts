@@ -110,3 +110,27 @@ export class DiagnosticCollector {
     return toValidationResult(this.diagnostics);
   }
 }
+
+/** SDK-1800.016 — Diagnostic Formatter (spec-named interface). */
+export interface ROCDiagnosticFormatter {
+  format(diagnostic: ROCDiagnostic): string;
+
+  formatMany(diagnostics: ROCDiagnostic[]): string[];
+
+  groupBySeverity(diagnostics: ROCDiagnostic[]): Record<string, ROCDiagnostic[]>;
+
+  toJson(diagnostics: ROCDiagnostic[]): Record<string, unknown>;
+}
+
+export function createDiagnosticFormatter(): ROCDiagnosticFormatter {
+  return {
+    format: formatDiagnostic,
+    formatMany: (diagnostics) => diagnostics.map(formatDiagnostic),
+    groupBySeverity(diagnostics) {
+      const groups: Record<string, ROCDiagnostic[]> = {};
+      for (const d of diagnostics) (groups[d.severity] ??= []).push(d);
+      return groups;
+    },
+    toJson: (diagnostics) => ({ diagnostics, count: diagnostics.length })
+  };
+}

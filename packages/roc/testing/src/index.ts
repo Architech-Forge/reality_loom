@@ -6,6 +6,7 @@
  * experience must be testable without rendering pixels.
  */
 import type {
+  ROCDiagnostic,
   SLIProjectionInput,
   SLIProjectionOutput,
   SLIRecompositionInput,
@@ -167,3 +168,131 @@ export class ProjectionTestHarness {
 }
 
 export { SemanticAssertions } from "./assertions.js";
+
+/** SDK-1800.018 — spec-named harness interface (implemented by RuntimeTestHarness). */
+export interface WGERuntimeTestHarness {
+  send(message: WILMessage): Promise<WGERuntimeOutput>;
+  currentSnapshot(): Promise<WGESnapshot>;
+  trace(traceId: string): Promise<WILTrace>;
+  expectNoRealityMutation(fn: () => Promise<void>): Promise<void>;
+  expectCommittedSnapshot(fn: () => Promise<void>): Promise<WGESnapshot>;
+}
+
+/** SDK-1800.019 — spec-named harness interface (implemented by ProjectionTestHarness). */
+export interface SLIProjectionTestHarness {
+  project(input: SLIProjectionInput): Promise<SLIProjectionOutput>;
+  recompose(input: SLIRecompositionInput): Promise<SLIProjectionOutput>;
+  expectSinglePrimary(output: SLIProjectionOutput): void;
+  expectAccessible(output: SLIProjectionOutput): void;
+  expectEntityVisible(output: SLIProjectionOutput, entityId: string): void;
+  expectEntityHidden(output: SLIProjectionOutput, entityId: string): void;
+}
+
+/** TEST-2500.004 — Semantic Assertion record (data form of the assertions above). */
+export interface ROCSemanticAssertion {
+  id: string;
+
+  description: string;
+
+  target:
+    | "wil_message"
+    | "world"
+    | "graph"
+    | "compiler_output"
+    | "runtime_output"
+    | "snapshot"
+    | "diff"
+    | "trace"
+    | "candidate_world"
+    | "projection"
+    | "ai_result"
+    | "storage_state";
+
+  assertionType:
+    | "exists"
+    | "equals"
+    | "contains"
+    | "not_contains"
+    | "preserves_identity"
+    | "does_not_mutate"
+    | "emits_trace"
+    | "respects_permission"
+    | "is_deterministic"
+    | "is_redacted"
+    | "has_single_primary";
+
+  expected?: unknown;
+}
+
+/** TEST-2500.003 — Golden Fixture record. Executable specification examples. */
+export interface ROCGoldenFixture<TInput = unknown, TExpected = unknown> {
+  id: string;
+
+  specVersion: string;
+
+  description: string;
+
+  input: TInput;
+
+  expected: TExpected;
+
+  semanticAssertions: ROCSemanticAssertion[];
+
+  metadata?: Record<string, unknown>;
+}
+
+/** TEST-2500.002 — Test Matrix entry. A requirement without a test is not enforceable. */
+export interface ROCTestMatrixEntry {
+  id: string;
+
+  area:
+    | "wil"
+    | "wdl"
+    | "kernel"
+    | "graph"
+    | "compiler"
+    | "runtime"
+    | "physics"
+    | "sli"
+    | "design_system"
+    | "application"
+    | "sdk"
+    | "storage"
+    | "security"
+    | "ai"
+    | "devtools"
+    | "reference";
+
+  requirementIds: string[];
+
+  testIds: string[];
+
+  required: boolean;
+
+  status: "covered" | "partial" | "missing" | "blocked";
+}
+
+/** TEST-2500.022 — Failure Capture artifact: explain what broke, not merely that it broke. */
+export interface ROCTestFailureArtifact {
+  testId: string;
+
+  area: string;
+
+  message: string;
+
+  inputRefs: string[];
+
+  outputRefs: string[];
+
+  traceIds: string[];
+
+  snapshotIds?: string[];
+
+  diffIds?: string[];
+
+  projectionIds?: string[];
+
+  diagnostics: ROCDiagnostic[];
+
+  createdAt: string;
+}

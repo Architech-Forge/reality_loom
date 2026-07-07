@@ -391,3 +391,31 @@ export interface ROCDomainAdapter extends ROCDomainAdapterConfig {
 export function createAdapter(config: ROCDomainAdapterConfig): ROCDomainAdapter {
   return { ...config, identity: new DomainIdentityStore(config.applicationId, config.worldId) };
 }
+
+/** SDK-1800.014 — spec-named Domain Adapter SDK facade. */
+export interface ROCDomainAdapterSDK {
+  createAdapter(config: ROCDomainAdapterConfig): ROCDomainAdapter;
+
+  mapIdentity(
+    identity: DomainIdentityStore,
+    domainObjectType: string,
+    domainObjectId: string
+  ): ROCDomainIdentityMap;
+
+  createApplicationAspect(input: ApplicationAspectInput): WGEAspect;
+
+  createDomainLaw(input: ROCDomainLaw, worldId: string): WGELaw;
+
+  toWIL(event: ROCApplicationEvent, options: EventMappingOptions): ROCApplicationEventMapping;
+}
+
+export function createDomainAdapterSDK(): ROCDomainAdapterSDK {
+  return {
+    createAdapter,
+    mapIdentity: (identity, domainObjectType, domainObjectId) =>
+      identity.mapIdentity(domainObjectType, domainObjectId),
+    createApplicationAspect,
+    createDomainLaw,
+    toWIL: applicationEventToWIL
+  };
+}

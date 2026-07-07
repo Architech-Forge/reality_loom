@@ -30,7 +30,14 @@ import type {
   WILTarget
 } from "@roc/types";
 import { createWILMessage } from "@wge/wil";
+import type { ROCDiagnostic } from "@roc/types";
 import { ROCSDKError } from "./errors.js";
+
+/** SDK-1800.004 — Build Output. */
+export interface WorldBuilderResult {
+  worldDefinition: WDLDocument;
+  diagnostics: ROCDiagnostic[];
+}
 
 const require_ = (value: unknown, code: string, what: string): void => {
   if (value === undefined || value === null || value === "") {
@@ -385,6 +392,11 @@ export class WorldBuilder {
   constraint(declaration: WDLConstraintDeclaration): this {
     this.constraints.push(declaration);
     return this;
+  }
+
+  /** SDK-1800.004 spec-shaped result: definition plus diagnostics. */
+  buildResult(): WorldBuilderResult {
+    return { worldDefinition: this.build(), diagnostics: [] };
   }
 
   build(): WDLDocument {
