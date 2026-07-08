@@ -34,8 +34,10 @@ const BUILD_ORDER: string[] = [
   "packages/roc/security", // Vol 2300 — Security And Permissions
   "packages/roc/ai", // Vol 2400 — AI And Reasoning
   "packages/roc/devtools", // Vol 2100 — Developer Tooling
+  "packages/sli/renderer-react", // REF-1900.017 — Minimal Renderer Adapter (web)
   "examples/family-style-world", // 17. Reference applications
-  "apps/reference-demo" // 17. Reference applications
+  "apps/reference-demo", // 17. Reference applications
+  "apps/world-studio" // TOOL-2100.002 — World Studio (Reality Loom OS demo)
 ];
 
 let built = 0;

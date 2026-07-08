@@ -1,0 +1,24 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "jsx": "react-jsx",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"]
+  },
+  "include": ["src"],
+  "references": [
+    { "path": "../../packages/roc/types" },
+    { "path": "../../packages/roc/devtools" },
+    { "path": "../../packages/sdk" },
+    { "path": "../../packages/wge/runtime" },
+    { "path": "../../packages/wge/wil" },
+    { "path": "../../packages/sli/runtime" },
+    { "path": "../../packages/sli/design-system" },
+    { "path": "../../packages/sli/renderer-contract" },
+    { "path": "../../packages/sli/renderer-react" },
+    { "path": "../../examples/family-style-world" }
+  ]
+}

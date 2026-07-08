@@ -1,0 +1,31 @@
+{
+  "name": "@sli/renderer-react",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Minimal Renderer Adapter for the web (REF-1900.017, SLI-1500.012): converts SLI Projection Output into a living React surface without reinterpreting Reality.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist"],
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@sli/design-system": "workspace:*",
+    "@sli/renderer-contract": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0"
+  }
+}

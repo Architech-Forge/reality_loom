@@ -5,9 +5,18 @@
  * Reality outside WIL and returns proper exit codes with optional
  * machine-readable JSON.
  */
-import { readFileSync } from "node:fs";
 import { parseWDLDocument } from "@wge/wdl";
 import { compileWorld } from "@wge/compiler";
+
+/**
+ * File access is host-only and loaded lazily: the devtools package also
+ * serves browser-side inspectors (TOOL-2100.003 – .014), and importing
+ * node:fs at module scope would force Node onto every consumer.
+ */
+async function readFile(path: string): Promise<string> {
+  const { readFileSync } = await import("node:fs");
+  return readFileSync(path, "utf8");
+}
 
 export interface CliResult {
   code: number;
@@ -37,7 +46,7 @@ export async function runCli(argv: string[]): Promise<CliResult> {
       if (!file) return { code: 2, output: ["error: roc validate requires a file path"] };
       let content: unknown;
       try {
-        content = JSON.parse(readFileSync(file, "utf8"));
+        content = JSON.parse(await readFile(file));
       } catch (cause) {
         return { code: 2, output: [`error: cannot read ${file}: ${cause instanceof Error ? cause.message : cause}`] };
       }
@@ -59,7 +68,7 @@ export async function runCli(argv: string[]): Promise<CliResult> {
       if (!file) return { code: 2, output: ["error: roc compile requires a file path"] };
       let content: Record<string, unknown>;
       try {
-        content = JSON.parse(readFileSync(file, "utf8")) as Record<string, unknown>;
+        content = JSON.parse(await readFile(file)) as Record<string, unknown>;
       } catch (cause) {
         return { code: 2, output: [`error: cannot read ${file}: ${cause instanceof Error ? cause.message : cause}`] };
       }

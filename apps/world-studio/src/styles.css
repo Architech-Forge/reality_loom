@@ -1,0 +1,1069 @@
+/*
+ * World Studio theme.
+ *
+ * Color/space/motion values arrive as CSS variables from the SLI design
+ * extension (theme/tokens.ts) — this file maps semantic tokens to paint.
+ * Realm language: Reality = gold, Candidate = violet, Projection = teal,
+ * Law = ember. Color is never the only carrier of meaning: every realm is
+ * also labeled in text.
+ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background: var(--color-background, #0b0e14);
+  color: var(--color-foreground, #e8e4d8);
+  font-family: "Avenir Next", "Segoe UI", system-ui, sans-serif;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+/* --- Shell grid: one surface, chrome at the semantic edges ---------------- */
+
+.studio {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 48px 1fr minmax(96px, 20vh);
+  grid-template-columns: 260px 1fr;
+  grid-template-areas:
+    "north north"
+    "west canvas"
+    "south south";
+}
+
+.chrome {
+  background: rgba(13, 17, 26, 0.92);
+  border: 0 solid rgba(212, 160, 23, 0.12);
+}
+
+.chrome-north {
+  grid-area: north;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 16px;
+  border-bottom-width: 1px;
+  font-size: 12px;
+}
+
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.brand-mark {
+  color: var(--color-primary);
+}
+
+.brand-name {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.brand-sub {
+  color: var(--color-ambient);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.status-center {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.branch-badge {
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+}
+
+.branch-reality {
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+  background: rgba(212, 160, 23, 0.1);
+}
+
+.branch-candidate {
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+  background: rgba(139, 92, 246, 0.12);
+}
+
+.lineage {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 10.5px;
+  color: var(--color-ambient);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.lineage-current {
+  color: var(--color-primary);
+}
+
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+}
+
+.density-chip,
+.verify-chip {
+  padding: 2px 8px;
+  border-radius: 4px;
+  border: 1px solid rgba(232, 228, 216, 0.16);
+  color: var(--color-ambient);
+  font-size: 11px;
+}
+
+.verify-rendered {
+  color: var(--color-success);
+  border-color: rgba(74, 222, 128, 0.35);
+}
+
+.verify-degraded,
+.verify-failed {
+  color: var(--color-danger);
+  border-color: rgba(249, 115, 22, 0.5);
+}
+
+.actor-switch select {
+  background: #131826;
+  color: var(--color-foreground);
+  border: 1px solid rgba(232, 228, 216, 0.2);
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 12px;
+}
+
+/* --- Guide rail (west) ----------------------------------------------------- */
+
+.chrome-west {
+  grid-area: west;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 14px;
+  border-right-width: 1px;
+  overflow-y: auto;
+}
+
+.guide-bird {
+  font-size: 26px;
+}
+
+.guide-mode {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-supporting);
+}
+
+.guide-narration {
+  font-size: 13px;
+  color: var(--color-foreground);
+  background: rgba(45, 212, 191, 0.06);
+  border: 1px solid rgba(45, 212, 191, 0.18);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.guide-codex {
+  font-size: 10.5px;
+  color: var(--color-ambient);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.guide-acts {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 11.5px;
+}
+
+.guide-acts li {
+  padding-left: 16px;
+  position: relative;
+  color: var(--color-ambient);
+}
+
+.guide-acts li::before {
+  content: "○";
+  position: absolute;
+  left: 0;
+}
+
+.guide-acts li.done {
+  color: rgba(232, 228, 216, 0.55);
+}
+
+.guide-acts li.done::before {
+  content: "●";
+  color: var(--color-primary);
+}
+
+.guide-acts li.current {
+  color: var(--color-foreground);
+}
+
+.guide-acts li.current::before {
+  content: "◉";
+  color: var(--color-supporting);
+}
+
+.guide-tools {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* --- Buttons ----------------------------------------------------------------- */
+
+.button-primary {
+  background: linear-gradient(160deg, rgba(212, 160, 23, 0.9), rgba(212, 160, 23, 0.7));
+  color: #14100a;
+  border: none;
+  border-radius: 8px;
+  padding: 9px 14px;
+  font-weight: 600;
+  min-height: 44px;
+}
+
+.button-primary:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+.button-quiet {
+  background: transparent;
+  border: 1px solid rgba(232, 228, 216, 0.2);
+  border-radius: 8px;
+  padding: 7px 12px;
+  color: rgba(232, 228, 216, 0.8);
+  min-height: 36px;
+}
+
+.button-quiet:hover {
+  border-color: var(--color-supporting);
+  color: var(--color-foreground);
+}
+
+/* --- Canvas ------------------------------------------------------------------ */
+
+.canvas-region {
+  grid-area: canvas;
+  position: relative;
+  overflow: hidden;
+}
+
+.canvas-wrap {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(1200px 600px at 60% -10%, rgba(212, 160, 23, 0.05), transparent 60%),
+    radial-gradient(900px 500px at 10% 110%, rgba(45, 212, 191, 0.04), transparent 60%),
+    var(--color-background);
+  transition: box-shadow var(--motion-recompose-ms, 550ms) ease;
+}
+
+.canvas-wrap[data-branch="candidate"] {
+  box-shadow: inset 0 0 0 2px rgba(139, 92, 246, 0.55), inset 0 0 80px rgba(139, 92, 246, 0.1);
+}
+
+.canvas-flash {
+  animation: commit-flash 950ms ease-out;
+}
+
+@keyframes commit-flash {
+  0% {
+    box-shadow: inset 0 0 0 3px rgba(212, 160, 23, 0.9), inset 0 0 140px rgba(212, 160, 23, 0.28);
+  }
+  100% {
+    box-shadow: inset 0 0 0 0 rgba(212, 160, 23, 0);
+  }
+}
+
+.candidate-banner {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--color-secondary);
+  background: rgba(20, 15, 35, 0.9);
+  color: var(--color-secondary);
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+}
+
+.candidate-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  animation: candidate-pulse 2.4s ease-in-out infinite;
+}
+
+@keyframes candidate-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.threads {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.thread {
+  stroke: var(--color-supporting);
+  stroke-width: 1;
+  opacity: 0.35;
+}
+
+.thread-strong {
+  stroke: var(--color-primary);
+  stroke-width: 1.6;
+  opacity: 0.6;
+}
+
+.thread-faint {
+  opacity: 0.14;
+}
+
+.studio-surface {
+  z-index: 2;
+}
+
+.projection-reason {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  z-index: 25;
+  font-size: 11px;
+  color: var(--color-ambient);
+  max-width: 50%;
+  pointer-events: none;
+}
+
+.sli-hidden-recovery {
+  background: rgba(19, 24, 38, 0.92);
+  border: 1px dashed rgba(232, 228, 216, 0.35);
+  border-radius: 8px;
+  color: rgba(232, 228, 216, 0.75);
+  padding: 8px 12px;
+  min-width: 44px;
+  min-height: 44px;
+  font-size: 11.5px;
+}
+
+.sli-hidden-recovery:hover {
+  border-color: var(--color-supporting);
+  color: var(--color-foreground);
+}
+
+/* --- Entity cards -------------------------------------------------------------- */
+
+.sli-surface [data-entity-id] {
+  outline: none;
+}
+
+.sli-surface [data-entity-id]:focus-visible .entity-card {
+  box-shadow: 0 0 0 2px var(--color-focus);
+}
+
+.entity-card {
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(19, 24, 38, calc(0.55 + var(--sli-visual-weight, 0.5) * 0.35));
+  border: 1px solid rgba(232, 228, 216, calc(0.08 + var(--sli-visual-weight, 0.5) * 0.18));
+  opacity: calc(0.55 + var(--sli-visual-weight, 0.5) * 0.45);
+  transition: border-color 240ms ease, background 240ms ease;
+}
+
+.entity-card.selected {
+  border-color: var(--color-selection);
+}
+
+.role-primary.entity-card {
+  border-color: rgba(212, 160, 23, 0.55);
+  background: linear-gradient(170deg, rgba(212, 160, 23, 0.1), rgba(19, 24, 38, 0.9));
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+}
+
+.role-primary .entity-label {
+  font-size: 16px;
+}
+
+.role-ambient.entity-card {
+  background: transparent;
+  border-style: dashed;
+}
+
+.entity-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+}
+
+.entity-glyph {
+  font-size: 15px;
+}
+
+.entity-label {
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.status-chip {
+  font-size: 10px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.status-draft {
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
+.status-accepted {
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+}
+
+.redaction-chip {
+  font-size: 10px;
+  color: var(--color-warning);
+}
+
+.entity-meters {
+  display: flex;
+  gap: 6px;
+}
+
+.meter {
+  flex: 1;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(232, 228, 216, 0.1);
+  overflow: hidden;
+  display: inline-block;
+}
+
+.meter > span {
+  display: block;
+  height: 100%;
+  transition: width var(--motion-shift-ms, 400ms) ease;
+}
+
+.meter.relevance > span {
+  background: var(--color-primary);
+}
+
+.meter.confidence > span {
+  background: var(--color-supporting);
+}
+
+.aspect-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 10.5px;
+  overflow: hidden;
+}
+
+.aspect {
+  display: flex;
+  gap: 6px;
+  min-width: 0;
+}
+
+.aspect-kind {
+  color: var(--color-supporting);
+  flex-shrink: 0;
+}
+
+.aspect-fields {
+  color: rgba(232, 228, 216, 0.65);
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  min-width: 0;
+}
+
+.aspect-field.redacted {
+  color: var(--color-warning);
+}
+
+.entity-actions {
+  margin-top: auto;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.entity-action {
+  background: transparent;
+  border: 1px solid rgba(232, 228, 216, 0.16);
+  border-radius: 6px;
+  color: rgba(232, 228, 216, 0.6);
+  font-size: 10.5px;
+  padding: 3px 8px;
+}
+
+.entity-action:hover {
+  color: var(--color-foreground);
+  border-color: var(--color-supporting);
+}
+
+.entity-action.why {
+  border-color: rgba(45, 212, 191, 0.35);
+  color: var(--color-supporting);
+}
+
+/* Peripheral entities are compact chips: present, not demanding (SLI-1600.003). */
+.role-peripheral.entity-card {
+  padding: 4px 8px;
+  gap: 2px;
+  justify-content: center;
+}
+
+.role-peripheral .aspect-list,
+.role-peripheral .entity-meters,
+.role-peripheral .entity-actions {
+  display: none;
+}
+
+.role-peripheral .entity-label {
+  font-size: 10.5px;
+  font-weight: 500;
+}
+
+.role-peripheral .entity-glyph {
+  font-size: 12px;
+}
+
+/* Density-aware shedding (SLI-1600.007): metadata leaves first. */
+.sli-surface[data-density="ambient"] .aspect-list,
+.sli-surface[data-density="ambient"] .entity-meters {
+  display: none;
+}
+
+.sli-surface[data-density="aware"] [data-role="supporting"] .aspect-list {
+  display: none;
+}
+
+/* --- Journal (south) -------------------------------------------------------------- */
+
+.chrome-south {
+  grid-area: south;
+  border-top-width: 1px;
+  overflow-y: auto;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.answers {
+  border: 1px solid rgba(212, 160, 23, 0.4);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: rgba(212, 160, 23, 0.05);
+}
+
+.answers h2 {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: var(--color-primary);
+}
+
+.answers dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 6px 18px;
+}
+
+.answer dt {
+  font-weight: 600;
+  font-size: 12px;
+  color: var(--color-supporting);
+}
+
+.answer dd {
+  margin: 1px 0 0;
+  font-size: 11.5px;
+  color: rgba(232, 228, 216, 0.8);
+}
+
+.journal {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  font-size: 11.5px;
+}
+
+.journal-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  min-width: 0;
+}
+
+.journal-glyph {
+  color: var(--color-ambient);
+  flex-shrink: 0;
+}
+
+.kind-law .journal-glyph {
+  color: var(--color-danger);
+}
+
+.kind-outcome .journal-glyph {
+  color: var(--color-primary);
+}
+
+.kind-projection .journal-glyph {
+  color: var(--color-supporting);
+}
+
+.journal-title {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.status-rejected .journal-title,
+.status-conflict .journal-title {
+  color: var(--color-danger);
+}
+
+.journal-detail {
+  color: rgba(232, 228, 216, 0.55);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.journal-trace {
+  background: none;
+  border: none;
+  color: var(--color-supporting);
+  text-decoration: underline;
+  font-size: 10.5px;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+/* --- Surfaces (foreground/overlay) --------------------------------------------------- */
+
+.surface-layer {
+  position: fixed;
+  inset: 48px 0 0 260px;
+  z-index: 40;
+  pointer-events: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px;
+}
+
+.surface {
+  pointer-events: auto;
+  width: 380px;
+  max-width: calc(100vw - 300px);
+  max-height: 60vh;
+  overflow-y: auto;
+  background: rgba(13, 17, 26, 0.97);
+  border-radius: 14px;
+  border: 1px solid rgba(232, 228, 216, 0.16);
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+  animation: surface-enter var(--motion-enter-ms, 280ms) ease-out;
+}
+
+.surface-wide {
+  width: 560px;
+}
+
+@keyframes surface-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.realm-reality {
+  border-color: rgba(212, 160, 23, 0.5);
+}
+
+.realm-candidate {
+  border-color: rgba(139, 92, 246, 0.55);
+}
+
+.realm-law {
+  border-color: rgba(249, 115, 22, 0.55);
+}
+
+.realm-projection {
+  border-color: rgba(45, 212, 191, 0.45);
+}
+
+.surface-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 12px 14px 0;
+}
+
+.surface-head h2 {
+  margin: 0;
+  font-size: 13.5px;
+}
+
+.realm-law .surface-head h2 {
+  color: var(--color-danger);
+}
+
+.realm-candidate .surface-head h2 {
+  color: var(--color-secondary);
+}
+
+.realm-reality .surface-head h2 {
+  color: var(--color-primary);
+}
+
+.realm-projection .surface-head h2 {
+  color: var(--color-supporting);
+}
+
+.surface-close {
+  background: none;
+  border: none;
+  color: var(--color-ambient);
+  font-size: 13px;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.surface-body {
+  padding: 8px 14px 14px;
+  font-size: 12.5px;
+}
+
+.surface-fields {
+  margin: 8px 0;
+}
+
+.surface-fields dt {
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-ambient);
+  margin-top: 8px;
+}
+
+.surface-fields dd {
+  margin: 2px 0 0;
+}
+
+.surface-fields .redacted dd {
+  color: var(--color-warning);
+}
+
+.surface-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.surface-note {
+  font-size: 11px;
+  color: var(--color-ambient);
+}
+
+.decision-choice {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 6px 0;
+}
+
+.law-explanation {
+  color: var(--color-danger);
+  font-style: italic;
+}
+
+.explain-summary {
+  font-weight: 600;
+}
+
+.explain-uncertainty {
+  color: var(--color-warning);
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.comparison-item {
+  border-radius: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.comparison-item.kind-reality {
+  border: 1px solid rgba(212, 160, 23, 0.5);
+}
+
+.comparison-item.kind-candidate_world {
+  border: 1px dashed rgba(139, 92, 246, 0.6);
+}
+
+.comparison-kind {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+}
+
+.kind-reality .comparison-kind {
+  color: var(--color-primary);
+}
+
+.kind-candidate_world .comparison-kind {
+  color: var(--color-secondary);
+}
+
+.comparison-label {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  word-break: break-all;
+}
+
+.diff-ops {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  font-size: 11px;
+  margin: 6px 0;
+  padding-left: 18px;
+}
+
+.trace-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trace-step {
+  display: grid;
+  grid-template-columns: 110px 70px 1fr;
+  gap: 8px;
+  font-size: 11.5px;
+  align-items: baseline;
+}
+
+.trace-phase {
+  color: var(--color-supporting);
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.trace-status {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.trace-passed {
+  color: var(--color-success);
+}
+
+.trace-blocked,
+.trace-failed {
+  color: var(--color-danger);
+}
+
+.trace-reason {
+  color: rgba(232, 228, 216, 0.75);
+}
+
+.physics-affected,
+.physics-paths,
+.physics-triggers {
+  list-style: none;
+  margin: 4px 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 11.5px;
+}
+
+.physics-affected li {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.physics-entity {
+  font-family: ui-monospace, "SF Mono", Menlo, monospace;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.physics-numbers {
+  color: var(--color-ambient);
+  font-size: 10.5px;
+}
+
+.physics-paths .blocked {
+  color: var(--color-danger);
+}
+
+.surface-body h3 {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-ambient);
+  margin: 12px 0 4px;
+}
+
+.trigger-priority {
+  font-size: 10px;
+  padding: 1px 6px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+}
+
+.priority-critical,
+.priority-high {
+  color: var(--color-danger);
+}
+
+.priority-normal {
+  color: var(--color-supporting);
+}
+
+.priority-idle {
+  color: var(--color-ambient);
+}
+
+.inspect-aspect h3 {
+  color: var(--color-supporting);
+}
+
+/* --- Boot ------------------------------------------------------------------------------ */
+
+.boot-screen {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--color-ambient);
+}
+
+.boot-mark {
+  font-size: 34px;
+  color: var(--color-primary);
+  animation: candidate-pulse 1.8s ease-in-out infinite;
+}
+
+.boot-error {
+  color: var(--color-danger);
+  max-width: 560px;
+}
+
+/* --- Reduced motion: static state change everywhere ------------------------------------- */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

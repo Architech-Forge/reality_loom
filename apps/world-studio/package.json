@@ -1,0 +1,32 @@
+{
+  "name": "@apps/world-studio",
+  "version": "0.1.0",
+  "private": true,
+  "description": "World Studio (TOOL-2100.002) — the Reality Loom OS demo: one living canvas projecting a real World through the full ROC stack. No pages, no reloads; the experience recomposes.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@roc/types": "workspace:*",
+    "@roc/sdk": "workspace:*",
+    "@roc/devtools": "workspace:*",
+    "@wge/runtime": "workspace:*",
+    "@wge/wil": "workspace:*",
+    "@sli/runtime": "workspace:*",
+    "@sli/design-system": "workspace:*",
+    "@sli/renderer-contract": "workspace:*",
+    "@sli/renderer-react": "workspace:*",
+    "@examples/family-style-world": "workspace:*",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^4.4.0",
+    "vite": "^6.3.0"
+  }
+}

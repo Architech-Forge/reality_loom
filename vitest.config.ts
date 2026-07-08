@@ -20,6 +20,7 @@ export default defineConfig({
       "@sli/renderer-contract": p("./packages/sli/renderer-contract/src/index.ts"),
       "@sli/design-system": p("./packages/sli/design-system/src/index.ts"),
       "@sli/runtime": p("./packages/sli/runtime/src/index.ts"),
+      "@sli/renderer-react": p("./packages/sli/renderer-react/src/index.ts"),
       "@roc/testing": p("./packages/roc/testing/src/index.ts"),
       "@roc/compliance": p("./packages/roc/compliance/src/index.ts"),
       "@roc/app-integration": p("./packages/roc/app-integration/src/index.ts"),
@@ -35,6 +36,7 @@ export default defineConfig({
   test: {
     include: [
       "packages/**/tests/**/*.test.ts",
+      "packages/**/tests/**/*.test.tsx",
       "compliance/suites/**/*.test.ts",
       "e2e/**/*.test.ts"
     ]

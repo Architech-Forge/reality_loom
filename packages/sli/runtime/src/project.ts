@@ -236,6 +236,7 @@ function buildProjectionUnsafe(
         reason
       };
     });
+  distributeWithinRegions(placements);
   const readingOrder = focusOrder.map((f) => f.entityId);
   const layoutPlan: SLILayoutPlan = {
     id: `layout_${projectionId}`,
@@ -520,23 +521,63 @@ function planAccessibility(
   };
 }
 
+/** Normalized base bounds per semantic region (SLI-1600.002). */
+const REGION_BASE_BOUNDS: Record<string, SLIBoundsHint> = {
+  center: { x: 0.25, y: 0.15, width: 0.5, height: 0.6 },
+  north: { x: 0.25, y: 0.0, width: 0.5, height: 0.1 },
+  east: { x: 0.78, y: 0.15, width: 0.2, height: 0.6 },
+  south: { x: 0.25, y: 0.78, width: 0.5, height: 0.18 },
+  west: { x: 0.02, y: 0.15, width: 0.2, height: 0.6 },
+  periphery: { x: 0.02, y: 0.78, width: 0.2, height: 0.18 },
+  background: { x: 0, y: 0, width: 1, height: 1 },
+  foreground: { x: 0.3, y: 0.3, width: 0.4, height: 0.4 },
+  overlay: { x: 0.2, y: 0.2, width: 0.6, height: 0.6 },
+  ambient: { x: 0.78, y: 0.02, width: 0.2, height: 0.1 }
+};
+
 /** Deterministic normalized bounds per semantic region and slot index. */
 function boundsFor(regionId: string, slot: number): SLIBoundsHint {
-  const base: Record<string, SLIBoundsHint> = {
-    center: { x: 0.25, y: 0.15, width: 0.5, height: 0.6 },
-    north: { x: 0.25, y: 0.0, width: 0.5, height: 0.1 },
-    east: { x: 0.78, y: 0.15, width: 0.2, height: 0.6 },
-    south: { x: 0.25, y: 0.78, width: 0.5, height: 0.18 },
-    west: { x: 0.02, y: 0.15, width: 0.2, height: 0.6 },
-    periphery: { x: 0.02, y: 0.78, width: 0.2, height: 0.18 },
-    background: { x: 0, y: 0, width: 1, height: 1 },
-    foreground: { x: 0.3, y: 0.3, width: 0.4, height: 0.4 },
-    overlay: { x: 0.2, y: 0.2, width: 0.6, height: 0.6 },
-    ambient: { x: 0.78, y: 0.02, width: 0.2, height: 0.1 }
-  };
-  const bounds = base[regionId] ?? base["center"];
+  const bounds = REGION_BASE_BOUNDS[regionId] ?? REGION_BASE_BOUNDS["center"];
   if (!bounds) return { x: 0, y: 0, width: 1, height: 1 };
   // Stack subsequent entities within a region deterministically.
   const offset = slot * 0.02;
   return { ...bounds, y: Math.min(0.9, bounds.y + offset) };
+}
+
+/**
+ * Distributes co-located placements within each region into a deterministic
+ * grid so interactive targets never overlap (SLI-1500.008). Grid shape
+ * follows the region's aspect: wide regions grow columns, tall regions grow
+ * rows. Placement order is the composition order, which is already
+ * deterministic, so identical inputs yield identical grids.
+ */
+function distributeWithinRegions(placements: SLIPlacement[]): void {
+  const byRegion = new Map<string, SLIPlacement[]>();
+  for (const placement of placements) {
+    const group = byRegion.get(placement.regionId) ?? [];
+    group.push(placement);
+    byRegion.set(placement.regionId, group);
+  }
+  const GAP = 0.012;
+  for (const [regionId, group] of byRegion) {
+    if (group.length <= 1 || regionId === "background" || regionId === "overlay") continue;
+    const base = REGION_BASE_BOUNDS[regionId];
+    if (!base) continue;
+    const aspect = base.width / Math.max(base.height, 0.01);
+    const columns = Math.max(
+      1,
+      Math.min(group.length, Math.round(Math.sqrt(group.length * aspect)) || 1)
+    );
+    const rows = Math.ceil(group.length / columns);
+    group.forEach((placement, index) => {
+      const column = index % columns;
+      const row = Math.floor(index / columns);
+      placement.boundsHint = {
+        x: base.x + (column * base.width) / columns + GAP / 2,
+        y: base.y + (row * base.height) / rows + GAP / 2,
+        width: Math.max(0.02, base.width / columns - GAP),
+        height: Math.max(0.02, base.height / rows - GAP)
+      };
+    });
+  }
 }

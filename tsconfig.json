@@ -69,6 +69,12 @@
     },
     {
       "path": "packages/roc/devtools"
+    },
+    {
+      "path": "packages/sli/renderer-react"
+    },
+    {
+      "path": "apps/world-studio"
     }
   ]
 }
