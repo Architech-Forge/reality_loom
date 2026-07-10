@@ -17,6 +17,9 @@ importers:
       '@examples/family-style-world':
         specifier: workspace:*
         version: link:examples/family-style-world
+      '@realityloom/interface':
+        specifier: workspace:*
+        version: link:packages/interface
       '@roc/ai':
         specifier: workspace:*
         version: link:packages/roc/ai
@@ -186,6 +189,18 @@ importers:
       '@wge/wdl':
         specifier: workspace:*
         version: link:../../packages/wge/wdl
+
+  packages/interface:
+    dependencies:
+      '@roc/devtools':
+        specifier: workspace:*
+        version: link:../roc/devtools
+      '@roc/types':
+        specifier: workspace:*
+        version: link:../roc/types
+      '@sli/renderer-contract':
+        specifier: workspace:*
+        version: link:../sli/renderer-contract
 
   packages/roc/ai:
     dependencies:

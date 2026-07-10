@@ -18,7 +18,7 @@ import { buildProjection, projectionInputFromWorld } from "@sli/runtime";
 import { validateWILMessage } from "@wge/wil";
 import { assert, emma, aiActor, guest, FIXED_NOW, loadFamilyRuntime } from "./helpers.js";
 
-const identity = () => new DomainIdentityStore("lilbirdi", "world_family", () => FIXED_NOW);
+const identity = () => new DomainIdentityStore("emilu", "world_family", () => FIXED_NOW);
 
 export const applicationSuite: ROCComplianceSuite = {
   id: "suite_application",
@@ -31,19 +31,19 @@ export const applicationSuite: ROCComplianceSuite = {
       const first = store.mapIdentity("garment", "G-1001");
       const second = store.mapIdentity("garment", "G-1001");
       assert(first.entityId === second.entityId, "same domain object → same entity id");
-      assert(first.entityId === "lilbirdi__garment__g_1001", "id is deterministic and namespaced");
+      assert(first.entityId === "emilu__garment__g_1001", "id is deterministic and namespaced");
     }),
     defineTest("APP-CT-002", "Identity mapping stable across recompilation", ["APP-1700.004"], async () => {
-      const a = DomainIdentityStore.entityIdFor("lilbirdi", "garment", "G-1001");
-      const b = DomainIdentityStore.entityIdFor("lilbirdi", "garment", "G-1001"); // fresh process ≡ fresh call
+      const a = DomainIdentityStore.entityIdFor("emilu", "garment", "G-1001");
+      const b = DomainIdentityStore.entityIdFor("emilu", "garment", "G-1001"); // fresh process ≡ fresh call
       assert(a === b, "mapping is a pure function of application + type + domain id");
     }),
     defineTest("APP-CT-003", "Application Aspects use namespace", ["APP-1700.005"], async () => {
       const aspect = createApplicationAspect({
-        entityId: "e1", applicationId: "lilbirdi", name: "style_dna",
+        entityId: "e1", applicationId: "emilu", name: "style_dna",
         data: { preferredColors: ["sage", "cream"] }
       });
-      assert(aspect.kind === "lilbirdi.style_dna", "namespaced kind");
+      assert(aspect.kind === "emilu.style_dna", "namespaced kind");
       let threw = false;
       try {
         createApplicationAspect({ entityId: "e1", applicationId: "Bad App!", name: "x", data: {} });
@@ -53,7 +53,7 @@ export const applicationSuite: ROCComplianceSuite = {
       assert(threw, "invalid namespace rejected");
       let rendererRejected = false;
       try {
-        createApplicationAspect({ entityId: "e1", applicationId: "lilbirdi", name: "hack", data: { css: "red" } });
+        createApplicationAspect({ entityId: "e1", applicationId: "emilu", name: "hack", data: { css: "red" } });
       } catch {
         rendererRejected = true;
       }
@@ -62,8 +62,8 @@ export const applicationSuite: ROCComplianceSuite = {
     defineTest("APP-CT-004", "Domain Law compiles into World Law", ["APP-1700.006"], async () => {
       const law = createDomainLaw(
         {
-          id: "law_lilbirdi_availability",
-          applicationId: "lilbirdi",
+          id: "law_emilu_availability",
+          applicationId: "emilu",
           name: "Unavailable garments cannot be recommended",
           appliesTo: { kind: "type", value: "garment" },
           condition: Cond.aspectEquals("application", "availability.status", "available"),
@@ -89,14 +89,14 @@ export const applicationSuite: ROCComplianceSuite = {
     defineTest("APP-CT-005", "Application Event maps to WIL", ["APP-1700.008"], async () => {
       const mapping = applicationEventToWIL(
         {
-          id: "evt_1", applicationId: "lilbirdi", actorId: emma.id,
+          id: "evt_1", applicationId: "emilu", actorId: emma.id,
           type: "garment.created", domainObjectId: "G-1001", occurredAt: FIXED_NOW,
           payload: { type: "garment" }
         },
         { actor: emma, worldId: "world_family", identity: identity(), domainObjectType: "garment" }
       );
       assert(mapping.wilMessage.intent.type === "create", "intent chosen from event type");
-      assert(mapping.wilMessage.target.id === "lilbirdi__garment__g_1001", "domain identity preserved");
+      assert(mapping.wilMessage.target.id === "emilu__garment__g_1001", "domain identity preserved");
       assert(validateWILMessage(mapping.wilMessage).valid, "produced message is valid WIL");
       assert(
         (mapping.wilMessage.context.application as { eventId: string }).eventId === "evt_1",
@@ -115,7 +115,7 @@ export const applicationSuite: ROCComplianceSuite = {
       assert(threw, "snapshots cannot be mutated directly");
       // The only mutation path the integration layer offers IS a WIL message.
       const mapping = applicationEventToWIL(
-        { id: "evt_2", applicationId: "lilbirdi", actorId: emma.id, type: "garment.updated", domainObjectId: "G-1", occurredAt: FIXED_NOW },
+        { id: "evt_2", applicationId: "emilu", actorId: emma.id, type: "garment.updated", domainObjectId: "G-1", occurredAt: FIXED_NOW },
         { actor: emma, worldId: "world_family", identity: identity(), domainObjectType: "garment" }
       );
       assert(mapping.wilMessage.protocol === "wil", "application events become WIL, nothing else");
@@ -123,7 +123,7 @@ export const applicationSuite: ROCComplianceSuite = {
     defineTest("APP-CT-007", "Application permissions map to WIL Authority", ["APP-1700.014"], async () => {
       const authority = permissionsToAuthority(
         {
-          applicationId: "lilbirdi", actorId: emma.id,
+          applicationId: "emilu", actorId: emma.id,
           appPermissions: ["household:member", "wardrobe:edit"],
           wilPermissions: ["world.observe", "world.simulate", "world.commit"],
           worldScope: ["world_family"]
@@ -135,7 +135,7 @@ export const applicationSuite: ROCComplianceSuite = {
     }),
     defineTest("APP-CT-008", "Projection Hint cannot force primary against SLI rules", ["APP-1700.007"], async () => {
       const hint = projectionHintToAspect({
-        entityId: "garment_blue_jacket", applicationId: "lilbirdi",
+        entityId: "garment_blue_jacket", applicationId: "emilu",
         preferredRole: "primary", reason: "app really wants the jacket front and center"
       });
       assert(hint.kind === "projection_hint", "hint lowers to a projection_hint aspect");
@@ -177,7 +177,7 @@ export const applicationSuite: ROCComplianceSuite = {
       assert(allowed.outcome.status === "success", "explicit delegation enables commit");
     }),
     defineTest("APP-CT-013", "External data includes provenance and confidence", ["APP-1700.015"], async () => {
-      const aspect = externalDataToAspect("weather_forecast", "lilbirdi", "weather_feed", {
+      const aspect = externalDataToAspect("weather_forecast", "emilu", "weather_feed", {
         source: "weather-api.example", confidence: 0.7, timestamp: FIXED_NOW,
         freshness: "recent", data: { condition: "rain_possible" }
       });
@@ -185,7 +185,7 @@ export const applicationSuite: ROCComplianceSuite = {
       assert(provenance.source === "weather-api.example" && provenance.confidence === 0.7, "provenance preserved");
       let threw = false;
       try {
-        externalDataToAspect("e", "lilbirdi", "feed", {
+        externalDataToAspect("e", "emilu", "feed", {
           source: "", confidence: 0.7, timestamp: FIXED_NOW, freshness: "recent", data: {}
         });
       } catch {

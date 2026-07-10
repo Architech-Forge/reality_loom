@@ -53,7 +53,8 @@ export type ROCComplianceArea =
   | "security_privacy"
   | "storage"
   | "ai"
-  | "devtools";
+  | "devtools"
+  | "interface";
 
 export interface ROCComplianceContext {
   /** Fixed clock for deterministic suite execution. */

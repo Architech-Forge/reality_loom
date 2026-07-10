@@ -53,6 +53,7 @@
     "@roc/storage": "workspace:*",
     "@roc/security": "workspace:*",
     "@roc/ai": "workspace:*",
-    "@roc/devtools": "workspace:*"
+    "@roc/devtools": "workspace:*",
+    "@realityloom/interface": "workspace:*"
   }
 }

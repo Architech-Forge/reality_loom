@@ -15,14 +15,27 @@ import {
 } from "@wge/kernel";
 import type { WGEWorld } from "@roc/types";
 
-/** A minimal valid world: root + one person related to the root. */
+const FIXED_NOW = "2026-07-06T12:00:00.000Z";
+
+/**
+ * A minimal valid world: root + one person related to the root. Fully
+ * deterministic — every timestamp is pinned, because two constructions that
+ * straddle a millisecond boundary would otherwise hash differently and make
+ * the determinism assertions flaky.
+ */
 function familyWorld(): WGEWorld {
   const world = createWorld({ id: "world_family", name: "Family World" });
+  const root = world.entities[world.rootEntityId];
+  if (root) {
+    root.createdAt = FIXED_NOW;
+    root.updatedAt = FIXED_NOW;
+  }
   const emma = createEntity({
     id: "person_emma",
     worldId: world.id,
     type: "person",
-    lifecycle: "active"
+    lifecycle: "active",
+    createdAt: FIXED_NOW
   });
   world.entities[emma.id] = emma;
   const rel = createRelationship({
@@ -210,7 +223,7 @@ describe("createSnapshot (WGE-1000.009)", () => {
   it("hashes change when world content changes", () => {
     const world = familyWorld();
     const before = createSnapshot({ world });
-    const lila = createEntity({ id: "person_lila", worldId: world.id, type: "person", lifecycle: "active" });
+    const lila = createEntity({ id: "person_lila", worldId: world.id, type: "person", lifecycle: "active", createdAt: FIXED_NOW });
     world.entities[lila.id] = lila;
     const after = createSnapshot({ world, parentSnapshotId: before.id });
     expect(after.entityIndexHash).not.toBe(before.entityIndexHash);

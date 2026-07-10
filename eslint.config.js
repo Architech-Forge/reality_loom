@@ -3,7 +3,7 @@ import tseslint from "typescript-eslint";
 
 export default tseslint.config(
   {
-    ignores: ["**/dist/**", "**/node_modules/**", "reality_loom_codex/**"]
+    ignores: ["**/dist/**", "**/build/**", "**/node_modules/**", "reality_loom_codex/**"]
   },
   js.configs.recommended,
   ...tseslint.configs.recommended,

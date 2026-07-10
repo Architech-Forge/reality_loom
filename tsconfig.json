@@ -75,6 +75,9 @@
     },
     {
       "path": "apps/world-studio"
+    },
+    {
+      "path": "packages/interface"
     }
   ]
 }

@@ -28,6 +28,7 @@ export default defineConfig({
       "@roc/security": p("./packages/roc/security/src/index.ts"),
       "@roc/ai": p("./packages/roc/ai/src/index.ts"),
       "@roc/devtools": p("./packages/roc/devtools/src/index.ts"),
+      "@realityloom/interface": p("./packages/interface/src/index.ts"),
       "@roc/sdk": p("./packages/sdk/src/index.ts"),
       "@examples/family-style-world": p("./examples/family-style-world/src/index.ts"),
       "@apps/reference-demo": p("./apps/reference-demo/src/index.ts")

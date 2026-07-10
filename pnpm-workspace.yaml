@@ -3,5 +3,6 @@ packages:
   - "packages/wge/*"
   - "packages/sli/*"
   - "packages/sdk"
+  - "packages/interface"
   - "apps/*"
   - "examples/*"
