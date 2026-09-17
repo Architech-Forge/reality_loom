@@ -25,7 +25,7 @@
     "@wge/physics": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^22",
+    "@types/node": "^26",
     "@wge/compiler": "workspace:*",
     "@wge/wdl": "workspace:*"
   }

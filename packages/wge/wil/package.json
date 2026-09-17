@@ -20,6 +20,6 @@
     "@roc/types": "workspace:*"
   },
   "devDependencies": {
-    "@types/node": "^22"
+    "@types/node": "^26"
   }
 }
