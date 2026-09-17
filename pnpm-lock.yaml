@@ -17,7 +17,7 @@ importers:
       '@examples/family-style-world':
         specifier: workspace:*
         version: link:examples/family-style-world
-      '@realityloom/interface':
+      '@realityarchitecture/interface':
         specifier: workspace:*
         version: link:packages/interface
       '@roc/ai':

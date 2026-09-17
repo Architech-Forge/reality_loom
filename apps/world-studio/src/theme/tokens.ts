@@ -6,7 +6,7 @@
  * applied through the design system's own boundary-enforcing
  * applyDesignExtension; a rejected override is a bug, so it throws loudly.
  *
- * Realm color language (Reality Loom): Reality = gold, Candidate = violet,
+ * Realm color language (Reality Architecture): Reality = gold, Candidate = violet,
  * Projection = teal, Law = ember. Color is never the only carrier of meaning
  * (SLI-1600.009) — every realm is also labeled in text on the canvas.
  */

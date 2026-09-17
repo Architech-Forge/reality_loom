@@ -1,10 +1,10 @@
-# Reality Loom Architecture
+# Reality Architecture Architecture
 
 ## High-Level Stack
 
 ```mermaid
 flowchart TD
-  RL[Reality Loom] --> ROC[Reality-Oriented Computing]
+  RL[Reality Architecture] --> ROC[Reality-Oriented Computing]
   ROC --> WGE[World Graph Engine]
   WGE --> WR[World Runtime]
   WR --> SLI[Spatial Living Interface]
@@ -89,7 +89,7 @@ flowchart TD
 
 ```mermaid
 flowchart LR
-  subgraph Public[Open Source Reality Loom]
+  subgraph Public[Open Source Reality Architecture]
     COD[Codex]
     TYPES[Types]
     WGE[WGE]

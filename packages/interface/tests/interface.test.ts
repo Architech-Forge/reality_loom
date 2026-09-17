@@ -16,22 +16,22 @@ import {
   flattenObjects,
   flattenPrimitives,
   layoutProjection,
-  realityLoomPalette,
+  realityArchitecturePalette,
   resolveCollisions,
-  rlMotion,
+  raMotion,
   RuntimeField,
   RuntimeNode,
-  RL_FORBIDDEN_PRIMITIVES,
-  RL_INTERFACE_CONTRACT,
+  RA_FORBIDDEN_PRIMITIVES,
+  RA_INTERFACE_CONTRACT,
   sceneFromProjection,
   SubstrateField,
   TraceLine,
   TraceViewer,
   validateScene,
   WorldGraphInspector,
-  type RLScene,
-  type RLVisualObject
-} from "@realityloom/interface";
+  type RAScene,
+  type RAVisualObject
+} from "@realityarchitecture/interface";
 import { familyStyleWorld } from "@examples/family-style-world";
 
 const NOW = "2026-07-06T12:00:00Z";
@@ -57,7 +57,7 @@ async function loadRuntime(): Promise<WGERuntime> {
   return new WGERuntime(compiled.executableWorld as WGEExecutableWorld, { now: () => NOW });
 }
 
-const object = (id: string, x: number, y: number, priority = 50, extra: Partial<RLVisualObject> = {}): RLVisualObject => ({
+const object = (id: string, x: number, y: number, priority = 50, extra: Partial<RAVisualObject> = {}): RAVisualObject => ({
   id,
   kind: "node",
   layer: 3,
@@ -83,8 +83,8 @@ describe("no-overlap layout engine (contract rule 7)", () => {
     const settledLow = result.objects.find((o) => o.id === "low");
     expect(settledHigh?.bounds).toEqual(high.bounds); // step 3: preserved
     expect(result.moved).toEqual(["low"]); // step 4: displaced
-    expect(settledLow && detectCollisions([settledHigh as RLVisualObject, settledLow])).toEqual([]);
-    expect(result.diagnostics.some((d) => d.code === "RL_LAYOUT_DISPLACED")).toBe(true); // step 6
+    expect(settledLow && detectCollisions([settledHigh as RAVisualObject, settledLow])).toEqual([]);
+    expect(result.diagnostics.some((d) => d.code === "RA_LAYOUT_DISPLACED")).toBe(true); // step 6
   });
 
   it("permits declared, traceable overlap and records it", () => {
@@ -92,13 +92,13 @@ describe("no-overlap layout engine (contract rule 7)", () => {
     const nodeUnder = object("under", 110, 110, 50);
     const result = resolveCollisions([trace, nodeUnder], VIEWPORT);
     expect(result.moved).toEqual([]);
-    expect(result.diagnostics.some((d) => d.code === "RL_LAYOUT_INTENTIONAL_OVERLAP")).toBe(true);
+    expect(result.diagnostics.some((d) => d.code === "RA_LAYOUT_INTENTIONAL_OVERLAP")).toBe(true);
   });
 
   it("rejects allowOverlap without a declared reason (undeclared = invalid)", () => {
     const sneaky = object("sneaky", 0, 0, 50, { allowOverlap: true });
     const result = resolveCollisions([sneaky], VIEWPORT);
-    expect(result.diagnostics.some((d) => d.code === "RL_LAYOUT_INVALID_OBJECT")).toBe(true);
+    expect(result.diagnostics.some((d) => d.code === "RA_LAYOUT_INVALID_OBJECT")).toBe(true);
   });
 
   it("collapses to a node marker when no safe slot exists (step 5)", () => {
@@ -110,7 +110,7 @@ describe("no-overlap layout engine (contract rule 7)", () => {
     expect(result.collapsed).toEqual(["loser"]);
     const collapsed = result.objects.find((o) => o.id === "loser");
     expect(collapsed && collapsed.bounds.width <= 12 && collapsed.bounds.height <= 12).toBe(true);
-    expect(result.diagnostics.some((d) => d.code === "RL_LAYOUT_COLLAPSED")).toBe(true);
+    expect(result.diagnostics.some((d) => d.code === "RA_LAYOUT_COLLAPSED")).toBe(true);
   });
 
   it("is deterministic: identical contention resolves identically", () => {
@@ -122,12 +122,12 @@ describe("no-overlap layout engine (contract rule 7)", () => {
 });
 
 describe("motion semantics (contract rule 8)", () => {
-  it("carries the exact rlMotion tokens", () => {
-    expect(rlMotion.ripple).toEqual({ duration: 0.7, ease: [0.16, 1, 0.3, 1] });
-    expect(rlMotion.project).toEqual({ duration: 0.55, ease: [0.22, 1, 0.36, 1] });
-    expect(rlMotion.commit).toEqual({ duration: 0.38, ease: [0.2, 0.8, 0.2, 1] });
-    expect(rlMotion.trace).toEqual({ duration: 0.9, ease: [0.12, 0.7, 0.18, 1] });
-    expect(rlMotion.recede).toEqual({ duration: 0.42, ease: [0.4, 0, 0.2, 1] });
+  it("carries the exact raMotion tokens", () => {
+    expect(raMotion.ripple).toEqual({ duration: 0.7, ease: [0.16, 1, 0.3, 1] });
+    expect(raMotion.project).toEqual({ duration: 0.55, ease: [0.22, 1, 0.36, 1] });
+    expect(raMotion.commit).toEqual({ duration: 0.38, ease: [0.2, 0.8, 0.2, 1] });
+    expect(raMotion.trace).toEqual({ duration: 0.9, ease: [0.12, 0.7, 0.18, 1] });
+    expect(raMotion.recede).toEqual({ duration: 0.42, ease: [0.4, 0, 0.2, 1] });
   });
 
   it("rejects motion outside the runtime vocabulary and motion without meaning", () => {
@@ -139,25 +139,25 @@ describe("motion semantics (contract rule 8)", () => {
 });
 
 describe("visual tokens", () => {
-  it("carries the exact Reality Loom palette", () => {
-    expect(realityLoomPalette.void).toBe("#050607");
-    expect(realityLoomPalette.tealCore).toBe("#62E6D8");
-    expect(realityLoomPalette.oldGold).toBe("#C89B4A");
-    expect(realityLoomPalette.signalLine).toBe("rgba(98, 230, 216, 0.28)");
+  it("carries the exact Reality Architecture palette", () => {
+    expect(realityArchitecturePalette.void).toBe("#050607");
+    expect(realityArchitecturePalette.tealCore).toBe("#62E6D8");
+    expect(realityArchitecturePalette.oldGold).toBe("#C89B4A");
+    expect(realityArchitecturePalette.signalLine).toBe("rgba(98, 230, 216, 0.28)");
   });
 });
 
 describe("interface contract enforcement", () => {
-  const sceneWith = (primitives: RLScene["primitives"]): RLScene => ({
+  const sceneWith = (primitives: RAScene["primitives"]): RAScene => ({
     id: "scene_test",
     viewport: VIEWPORT,
     primitives
   });
 
   it("declares all ten rules", () => {
-    expect(RL_INTERFACE_CONTRACT).toHaveLength(10);
-    expect(RL_FORBIDDEN_PRIMITIVES).toContain("Card");
-    expect(RL_FORBIDDEN_PRIMITIVES).toContain("DashboardShell");
+    expect(RA_INTERFACE_CONTRACT).toHaveLength(10);
+    expect(RA_FORBIDDEN_PRIMITIVES).toContain("Card");
+    expect(RA_FORBIDDEN_PRIMITIVES).toContain("DashboardShell");
   });
 
   it("rejects forbidden primary primitives (rule 1)", () => {

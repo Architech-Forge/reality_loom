@@ -1,6 +1,6 @@
 # Security Policy
 
-Reality Loom is an early public foundation. Please handle security issues carefully.
+Reality Architecture is an early public foundation. Please handle security issues carefully.
 
 ## Do Not Post Publicly
 
@@ -23,7 +23,7 @@ For now, report sensitive issues privately to the project maintainer / Architech
 Recommended future setup:
 
 ```text
-security@realityloom.com
+security@realityarchitecture.com
 security@architechforge.com
 ```
 

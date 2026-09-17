@@ -1,6 +1,6 @@
-# Reality Loom
+# Reality Architecture
 
-**Reality Loom** is an open foundation for building software as living worlds instead of screens around data.
+**Reality Architecture** is an open foundation for building software as living worlds instead of screens around data.
 
 It is the early public foundation for **Reality-Oriented Computing**: a way of describing reality, computing understanding, and projecting experience through world-aware systems.
 
@@ -10,13 +10,13 @@ Compute understanding.
 Project experience.
 ```
 
-Reality Loom is currently published by **Architech Forge**. The long-term intent is for Reality Loom to become its own dedicated platform/company and steward the category, standards, and ecosystem.
+Reality Architecture is currently published by **Architech Forge**. The long-term intent is for Reality Architecture to become its own dedicated platform/company and steward the category, standards, and ecosystem.
 
 ---
 
-## What Reality Loom Is
+## What Reality Architecture Is
 
-Reality Loom is a public foundation for a new class of software:
+Reality Architecture is a public foundation for a new class of software:
 
 - software that models reality as worlds, entities, relationships, laws, events, objectives, and traces
 - software that separates possible states from committed reality
@@ -24,7 +24,7 @@ Reality Loom is a public foundation for a new class of software:
 - software that treats AI as a bounded actor, not an unquestioned authority
 - software that makes privacy, traceability, and determinism part of the architecture
 
-Reality Loom is not another app framework, chat interface, dashboard system, or AI wrapper.
+Reality Architecture is not another app framework, chat interface, dashboard system, or AI wrapper.
 
 It is a foundation for **world-oriented, reality-aware software**.
 
@@ -33,7 +33,7 @@ It is a foundation for **world-oriented, reality-aware software**.
 ## Core Stack
 
 ```text
-Reality Loom
+Reality Architecture
   ↓
 Reality-Oriented Computing
   ↓
@@ -150,7 +150,7 @@ Deferred capabilities (federation, replay, incremental compilation, compiler plu
 
 ## What Is Public In This Repository
 
-This repository is intended to contain the public Reality Loom foundation:
+This repository is intended to contain the public Reality Architecture foundation:
 
 - Codex volumes
 - WGE schemas and canonical types
@@ -179,13 +179,13 @@ Do not include:
 - proprietary avatar, commerce, admin, or recommendation systems
 - unreleased business plans, investor materials, or customer data
 
-Reality Loom is the open foundation. Private products remain private.
+Reality Architecture is the open foundation. Private products remain private.
 
 ---
 
 ## Current Status
 
-Reality Loom is early and evolving.
+Reality Architecture is early and evolving.
 
 The Codex currently covers a substantial foundation, including volumes in the 800–2500 range. That is enough to publish as an early public foundation **if the repository has been cleaned of private code, secrets, proprietary prompts, and product-specific moat**.
 
@@ -202,7 +202,7 @@ Use: study, experimentation, contribution, reference implementation
 
 ## Repository Principles
 
-Reality Loom should remain:
+Reality Architecture should remain:
 
 - deterministic where runtime truth is concerned
 - traceable where decisions are made
@@ -219,7 +219,7 @@ Reality Loom should remain:
 
 ## Governance
 
-Reality Loom is currently owned and published by **Architech Forge**.
+Reality Architecture is currently owned and published by **Architech Forge**.
 
 Planned future stewardship:
 
@@ -227,7 +227,7 @@ Planned future stewardship:
 Architech Forge
   early creator / publisher / incubator
 
-Reality Loom
+Reality Architecture
   future dedicated company / platform steward / category owner
 ```
 

@@ -1,6 +1,6 @@
 # Code of Conduct
 
-Reality Loom is intended to be a serious, open, constructive project for advancing reality-oriented computing.
+Reality Architecture is intended to be a serious, open, constructive project for advancing reality-oriented computing.
 
 Participants are expected to:
 

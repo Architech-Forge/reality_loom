@@ -1,9 +1,9 @@
 /**
- * Line system — thin luminous geometry. Lines ARE the Reality Loom
+ * Line system — thin luminous geometry. Lines ARE the Reality Architecture
  * aesthetic: structure is drawn, not boxed.
  */
 
-export type RLLineRole =
+export type RALineRole =
   | "rest" // resting structure
   | "signal" // energized/live structure
   | "trace" // causality path
@@ -11,14 +11,14 @@ export type RLLineRole =
   | "boundary" // authority edge
   | "commit"; // consequential edge
 
-export interface RLLineToken {
-  role: RLLineRole;
+export interface RALineToken {
+  role: RALineRole;
   width: number;
   dash?: readonly number[];
   colorRole: "line" | "signalLine" | "trace" | "candidate" | "boundary" | "reality";
 }
 
-export const rlLines: Record<RLLineRole, RLLineToken> = {
+export const raLines: Record<RALineRole, RALineToken> = {
   rest: { role: "rest", width: 1, colorRole: "line" },
   signal: { role: "signal", width: 1, colorRole: "signalLine" },
   trace: { role: "trace", width: 1.5, colorRole: "trace" },

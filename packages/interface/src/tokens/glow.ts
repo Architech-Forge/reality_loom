@@ -4,10 +4,10 @@
  * Intensity is bounded; the substrate stays dark and precise.
  */
 
-export type RLGlowRole = "projection" | "ripple" | "commit" | "trace" | "candidate";
+export type RAGlowRole = "projection" | "ripple" | "commit" | "trace" | "candidate";
 
-export interface RLGlowToken {
-  role: RLGlowRole;
+export interface RAGlowToken {
+  role: RAGlowRole;
   /** Blur radius in px at scale 1. */
   radius: number;
   /** 0..1 — glow is a signal, so intensity is deliberately capped. */
@@ -15,9 +15,9 @@ export interface RLGlowToken {
   colorRole: "reality" | "trace" | "candidate";
 }
 
-export const RL_GLOW_MAX_INTENSITY = 0.45;
+export const RA_GLOW_MAX_INTENSITY = 0.45;
 
-export const rlGlow: Record<RLGlowRole, RLGlowToken> = {
+export const raGlow: Record<RAGlowRole, RAGlowToken> = {
   projection: { role: "projection", radius: 24, intensity: 0.35, colorRole: "reality" },
   ripple: { role: "ripple", radius: 32, intensity: 0.3, colorRole: "reality" },
   commit: { role: "commit", radius: 16, intensity: 0.45, colorRole: "reality" },

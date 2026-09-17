@@ -1,5 +1,5 @@
 /**
- * Reality Loom color system.
+ * Reality Architecture color system.
  *
  * dark · precise · spatial · technical · substrate-like · graph-based ·
  * thin luminous geometry · controlled teal/gold signal.
@@ -9,7 +9,7 @@
  * bound to a runtime meaning, and color is never the only carrier of it.
  */
 
-export const realityLoomPalette = {
+export const realityArchitecturePalette = {
   void: "#050607",
   obsidian: "#090B0D",
   graphite: "#12161A",
@@ -27,37 +27,37 @@ export const realityLoomPalette = {
   signalLine: "rgba(98, 230, 216, 0.28)"
 } as const;
 
-export type RLPaletteKey = keyof typeof realityLoomPalette;
+export type RAPaletteKey = keyof typeof realityArchitecturePalette;
 
 /** Runtime-semantic color roles — what each signal MEANS in the substrate. */
-export const rlColorRoles = {
+export const raColorRoles = {
   /** The substrate itself: the space Worlds live in. */
-  substrate: realityLoomPalette.void,
+  substrate: realityArchitecturePalette.void,
   /** Resting field surfaces. */
-  field: realityLoomPalette.obsidian,
+  field: realityArchitecturePalette.obsidian,
   /** Raised runtime structure. */
-  structure: realityLoomPalette.graphite,
+  structure: realityArchitecturePalette.graphite,
   /** Projection-active regions. */
-  projectionField: realityLoomPalette.deepField,
+  projectionField: realityArchitecturePalette.deepField,
 
   /** Committed Reality signal. */
-  reality: realityLoomPalette.tealCore,
+  reality: realityArchitecturePalette.tealCore,
   /** Live trace / causality signal. */
-  trace: realityLoomPalette.signalBlue,
+  trace: realityArchitecturePalette.signalBlue,
   /** Candidate / possibility signal — never teal: possibility must read differently from Reality. */
-  candidate: realityLoomPalette.oldGold,
+  candidate: realityArchitecturePalette.oldGold,
   /** Authority boundaries, blocked paths, and law rejections. */
-  boundary: realityLoomPalette.ember,
+  boundary: realityArchitecturePalette.ember,
 
   /** Primary readable content. */
-  content: realityLoomPalette.pearl,
+  content: realityArchitecturePalette.pearl,
   /** Secondary/receded content. */
-  contentMuted: realityLoomPalette.mutedPearl,
+  contentMuted: realityArchitecturePalette.mutedPearl,
 
   /** Resting geometry. */
-  line: realityLoomPalette.line,
+  line: realityArchitecturePalette.line,
   /** Energized geometry (active projection, live runtime). */
-  signalLine: realityLoomPalette.signalLine
+  signalLine: realityArchitecturePalette.signalLine
 } as const;
 
-export type RLColorRole = keyof typeof rlColorRoles;
+export type RAColorRole = keyof typeof raColorRoles;

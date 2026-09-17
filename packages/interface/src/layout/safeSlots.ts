@@ -3,12 +3,12 @@
  * outward from the preferred bounds in a deterministic spiral, so the same
  * contention always resolves to the same layout.
  */
-import { clampInto, intersects, within, type RLBounds } from "./bounds.js";
-import { RL_MIN_GAP } from "../tokens/spacing.js";
+import { clampInto, intersects, within, type RABounds } from "./bounds.js";
+import { RA_MIN_GAP } from "../tokens/spacing.js";
 
 /** Deterministic ring search: 8 directions per radius, radius grows by step. */
-export function* candidateSlots(preferred: RLBounds, viewport: RLBounds, maxRings = 12): Generator<RLBounds> {
-  const step = Math.max(RL_MIN_GAP * 2, Math.min(preferred.width, preferred.height) / 2, 16);
+export function* candidateSlots(preferred: RABounds, viewport: RABounds, maxRings = 12): Generator<RABounds> {
+  const step = Math.max(RA_MIN_GAP * 2, Math.min(preferred.width, preferred.height) / 2, 16);
   for (let ring = 1; ring <= maxRings; ring += 1) {
     const r = ring * step;
     // Fixed direction order: E, W, S, N, SE, SW, NE, NW — deterministic.
@@ -31,12 +31,12 @@ export function* candidateSlots(preferred: RLBounds, viewport: RLBounds, maxRing
  * slot exists — the caller collapses the object to a node marker.
  */
 export function nearestSafeSlot(
-  preferred: RLBounds,
-  obstacles: readonly RLBounds[],
-  viewport: RLBounds
-): RLBounds | undefined {
-  const fits = (slot: RLBounds): boolean =>
-    within(slot, viewport) && obstacles.every((o) => !intersects(slot, o, RL_MIN_GAP));
+  preferred: RABounds,
+  obstacles: readonly RABounds[],
+  viewport: RABounds
+): RABounds | undefined {
+  const fits = (slot: RABounds): boolean =>
+    within(slot, viewport) && obstacles.every((o) => !intersects(slot, o, RA_MIN_GAP));
 
   for (const slot of candidateSlots(preferred, viewport)) {
     if (fits(slot)) return slot;
@@ -47,7 +47,7 @@ export function nearestSafeSlot(
 /** The collapsed node marker an unplaceable object becomes. */
 export const NODE_MARKER_SIZE = 12;
 
-export function collapseToMarker(preferred: RLBounds, viewport: RLBounds): RLBounds {
+export function collapseToMarker(preferred: RABounds, viewport: RABounds): RABounds {
   return clampInto(
     {
       x: preferred.x + preferred.width / 2 - NODE_MARKER_SIZE / 2,

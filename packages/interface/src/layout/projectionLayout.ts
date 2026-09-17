@@ -1,17 +1,17 @@
 /**
- * Projection layout — the bridge from SLI's semantic plan to Reality Loom
+ * Projection layout — the bridge from SLI's semantic plan to Reality Architecture
  * visual objects. SLI decides WHAT is experienced (roles, regions, density);
  * this engine decides WHERE it stands in the substrate, with the no-overlap
  * invariant enforced on the result.
  */
 import type { SLIProjectionOutput } from "@roc/types";
-import type { RLBounds } from "./bounds.js";
+import type { RABounds } from "./bounds.js";
 import { resolveCollisions, type ResolveResult } from "./noOverlap.js";
-import type { RLVisualObject, RLVisualState } from "./visualObject.js";
+import type { RAVisualObject, RAVisualState } from "./visualObject.js";
 import { depthOf } from "../tokens/depth.js";
 
 /** SLI object role → RL runtime state. */
-const ROLE_STATE: Record<string, RLVisualState> = {
+const ROLE_STATE: Record<string, RAVisualState> = {
   primary: "focused",
   secondary: "projected",
   supporting: "projected",
@@ -21,7 +21,7 @@ const ROLE_STATE: Record<string, RLVisualState> = {
 };
 
 /** SLI object role → RL visual kind. */
-const ROLE_KIND: Record<string, RLVisualObject["kind"]> = {
+const ROLE_KIND: Record<string, RAVisualObject["kind"]> = {
   primary: "projection",
   secondary: "surface",
   supporting: "surface",
@@ -40,7 +40,7 @@ const ROLE_PRIORITY: Record<string, number> = {
 };
 
 export interface ProjectionLayoutResult extends ResolveResult {
-  viewport: RLBounds;
+  viewport: RABounds;
 }
 
 /**
@@ -49,13 +49,13 @@ export interface ProjectionLayoutResult extends ResolveResult {
  */
 export function layoutProjection(
   projection: SLIProjectionOutput,
-  viewport: RLBounds,
+  viewport: RABounds,
   options: { dev?: boolean } = {}
 ): ProjectionLayoutResult {
-  const objects: RLVisualObject[] = projection.rendererInstructions.map((instruction) => {
+  const objects: RAVisualObject[] = projection.rendererInstructions.map((instruction) => {
     const role = instruction.projectionRole;
     const hint = instruction.boundsHint;
-    const bounds: RLBounds = hint
+    const bounds: RABounds = hint
       ? {
           x: viewport.x + hint.x * viewport.width,
           y: viewport.y + hint.y * viewport.height,

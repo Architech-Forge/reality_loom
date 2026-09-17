@@ -26,17 +26,17 @@ import {
   RuntimeNode,
   TraceLine,
   WorldGraphCanvas,
-  type RLPrimitive
+  type RAPrimitive
 } from "../primitives/index.js";
 import { traceMotion } from "../motion/trace.js";
 import { commitMotion } from "../motion/commit.js";
 import { forkMotion } from "../motion/ripple.js";
 
-const node = (id: string, meaning: string, content: Record<string, unknown>): RLPrimitive =>
+const node = (id: string, meaning: string, content: Record<string, unknown>): RAPrimitive =>
   RuntimeNode({ id, meaning, content });
 
 /** The World Graph itself: entities as nodes, relationships as trace geometry. */
-export function WorldGraphInspector(inspection: WorldInspection): RLPrimitive {
+export function WorldGraphInspector(inspection: WorldInspection): RAPrimitive {
   return WorldGraphCanvas({
     id: `wgi_${inspection.worldId}`,
     meaning: `world graph of ${inspection.worldId} (${inspection.branch})`,
@@ -53,7 +53,7 @@ export function WorldGraphInspector(inspection: WorldInspection): RLPrimitive {
 }
 
 /** One entity across aspects — redacted fields become authority boundaries. */
-export function EntityInspector(inspection: EntityInspection): RLPrimitive {
+export function EntityInspector(inspection: EntityInspection): RAPrimitive {
   return RuntimeField({
     id: `ei_${inspection.entityId}`,
     meaning: `entity inspection: ${inspection.entityId}`,
@@ -77,7 +77,7 @@ export function EntityInspector(inspection: EntityInspection): RLPrimitive {
 }
 
 /** A single aspect's meaning. */
-export function AspectInspector(input: { entityId: string; kind: string; data: Record<string, unknown>; redacted?: boolean }): RLPrimitive {
+export function AspectInspector(input: { entityId: string; kind: string; data: Record<string, unknown>; redacted?: boolean }): RAPrimitive {
   const field = RuntimeField({
     id: `ai_${input.entityId}_${input.kind}`,
     meaning: `aspect ${input.kind} on ${input.entityId}`,
@@ -93,7 +93,7 @@ export function AspectInspector(input: { entityId: string; kind: string; data: R
 }
 
 /** A Law: selector, requirement, and what happens otherwise. */
-export function LawInspector(law: WGELaw): RLPrimitive {
+export function LawInspector(law: WGELaw): RAPrimitive {
   return RuntimeField({
     id: `li_${law.id}`,
     meaning: `law "${law.name}" (${law.scope}; otherwise ${law.outcome})`,
@@ -110,7 +110,7 @@ export function LawInspector(law: WGELaw): RLPrimitive {
 }
 
 /** Causality drawn: one node per step, connected by the trace line. */
-export function TraceViewer(trace: WILTrace): RLPrimitive {
+export function TraceViewer(trace: WILTrace): RAPrimitive {
   return TraceLine({
     id: `tv_${trace.id}`,
     meaning: `trace ${trace.id}: ${trace.summary}`,
@@ -132,7 +132,7 @@ export function TraceViewer(trace: WILTrace): RLPrimitive {
 export function CandidateWorldViewer(
   record: WGERuntimeCandidateWorld,
   comparison?: { equivalent: boolean; operationCount: number }
-): RLPrimitive {
+): RAPrimitive {
   return CandidateLayer({
     id: `cwv_${record.id}`,
     meaning: `candidate world ${record.id} — possibility, not Reality (status: ${record.status})`,
@@ -148,7 +148,7 @@ export function CandidateWorldViewer(
 }
 
 /** Ordered change: one node per operation, order preserved. */
-export function DiffViewer(diff: WGEDiff): RLPrimitive {
+export function DiffViewer(diff: WGEDiff): RAPrimitive {
   return RuntimeField({
     id: `dv_${diff.id}`,
     meaning: `diff ${diff.id}: ${diff.operations.length} ordered operation(s) from ${diff.fromSnapshotId}`,
@@ -161,7 +161,7 @@ export function DiffViewer(diff: WGEDiff): RLPrimitive {
 }
 
 /** Committed Reality at a moment, with its lineage. */
-export function SnapshotViewer(snapshot: WGESnapshot): RLPrimitive {
+export function SnapshotViewer(snapshot: WGESnapshot): RAPrimitive {
   return CommitSurface({
     id: `sv_${snapshot.id}`,
     meaning: `snapshot ${snapshot.id} — committed Reality${snapshot.parentSnapshotId ? ` descending from ${snapshot.parentSnapshotId}` : " (initial)"}`,
@@ -177,7 +177,7 @@ export function SnapshotViewer(snapshot: WGESnapshot): RLPrimitive {
 }
 
 /** A WIL message: actor, intent, target, mode — the protocol made visible. */
-export function WILMessageViewer(message: WILMessage): RLPrimitive {
+export function WILMessageViewer(message: WILMessage): RAPrimitive {
   return RuntimeField({
     id: `wmv_${message.id}`,
     meaning: `WIL ${message.intent.type}/${message.mode} from ${message.actor.id}`,
@@ -197,7 +197,7 @@ export function WDLCompilerFlow(input: {
   sourceId: string;
   success: boolean;
   diagnostics: WGECompilerDiagnostic[];
-}): RLPrimitive {
+}): RAPrimitive {
   const stages = ["intake", "parse", "semantics", "resolution", "laws", "traversals", "kernel", "executable"];
   return CompilerFlow({
     id: `cf_${input.sourceId}`,
@@ -217,7 +217,7 @@ export function WDLCompilerFlow(input: {
 }
 
 /** Why the experience looks the way it does. */
-export function ProjectionInspector(projection: SLIProjectionOutput): RLPrimitive {
+export function ProjectionInspector(projection: SLIProjectionOutput): RAPrimitive {
   return ProjectionSurface({
     id: `pi_${projection.id}`,
     meaning: `projection ${projection.id}: primary ${projection.composition.primaryEntityId} at ${projection.composition.density} density`,
@@ -243,7 +243,7 @@ export function AuthorityBoundaryViewer(input: {
   allowed: boolean;
   reason: string;
   traceId?: string;
-}): RLPrimitive {
+}): RAPrimitive {
   return AuthorityBoundary({
     id: `abv_${input.actorId}_${input.action.replace(/[^a-z0-9]+/gi, "_")}`,
     meaning: `${input.actorId} → ${input.action}: ${input.allowed ? "permitted" : "blocked"} — ${input.reason}`,

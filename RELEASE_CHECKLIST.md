@@ -1,12 +1,12 @@
 # Public Release Checklist
 
-Use this before pushing Reality Loom public on GitHub.
+Use this before pushing Reality Architecture public on GitHub.
 
 ## 1. Ownership
 
 - [ ] Repository owner is correct: Architech Forge
-- [ ] README states Reality Loom is currently owned/published by Architech Forge
-- [ ] README states planned future Reality Loom entity/company
+- [ ] README states Reality Architecture is currently owned/published by Architech Forge
+- [ ] README states planned future Reality Architecture entity/company
 - [ ] Personal authorship is credited without confusing IP ownership
 - [ ] Trademark notice is included
 
@@ -118,6 +118,6 @@ Confirm the repository contains no:
 ## Final Rule
 
 ```text
-Open-source Reality Loom.
+Open-source Reality Architecture.
 Do not accidentally open-source the private products built on it.
 ```

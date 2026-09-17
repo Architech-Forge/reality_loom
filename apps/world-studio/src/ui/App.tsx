@@ -69,7 +69,7 @@ export function App(): React.ReactNode {
             ◈
           </span>
           <span className="brand-name">World Studio</span>
-          <span className="brand-sub">Reality Loom OS</span>
+          <span className="brand-sub">Reality Architecture OS</span>
         </div>
         <div className="status-center">
           <span className={`branch-badge branch-${state.branch.kind}`}>{branchLabel}</span>

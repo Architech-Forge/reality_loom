@@ -1,17 +1,17 @@
 /**
- * The Reality Loom native primitives.
+ * The Reality Architecture native primitives.
  *
  * These replace cards, panels, tabs, dashboards, and generic sections with
  * world-native primitives (Interface Contract rules 1–2). A primitive is a
  * headless, typed scene descriptor: renderers on any platform express it;
  * none may reinterpret it.
  */
-import type { RLMotionDescriptor } from "../motion/tokens.js";
-import type { RLVisualObject, RLVisualKind, RLVisualState } from "../layout/visualObject.js";
-import type { RLBounds } from "../layout/bounds.js";
-import { depthOf, type RLDepthLayer } from "../tokens/depth.js";
+import type { RAMotionDescriptor } from "../motion/tokens.js";
+import type { RAVisualObject, RAVisualKind, RAVisualState } from "../layout/visualObject.js";
+import type { RABounds } from "../layout/bounds.js";
+import { depthOf, type RADepthLayer } from "../tokens/depth.js";
 
-export type RLPrimitiveName =
+export type RAPrimitiveName =
   | "WorldGate"
   | "RuntimeField"
   | "ProjectionSurface"
@@ -27,7 +27,7 @@ export type RLPrimitiveName =
   | "RecedeLayer"
   | "WorldGraphCanvas";
 
-export const RL_PRIMITIVES: readonly RLPrimitiveName[] = [
+export const RA_PRIMITIVES: readonly RAPrimitiveName[] = [
   "WorldGate",
   "RuntimeField",
   "ProjectionSurface",
@@ -45,7 +45,7 @@ export const RL_PRIMITIVES: readonly RLPrimitiveName[] = [
 ] as const;
 
 /** Forbidden as primary primitives (Interface Contract rules 1, 4, 5). */
-export const RL_FORBIDDEN_PRIMITIVES: readonly string[] = [
+export const RA_FORBIDDEN_PRIMITIVES: readonly string[] = [
   "Card",
   "FeatureCard",
   "Panel",
@@ -57,13 +57,13 @@ export const RL_FORBIDDEN_PRIMITIVES: readonly string[] = [
   "GenericSection"
 ] as const;
 
-export interface RLPrimitive {
-  primitive: RLPrimitiveName;
-  object: RLVisualObject;
+export interface RAPrimitive {
+  primitive: RAPrimitiveName;
+  object: RAVisualObject;
   /** Human/runtime meaning: why this exists in the scene — always traceable. */
   meaning: string;
-  children: RLPrimitive[];
-  motion?: RLMotionDescriptor;
+  children: RAPrimitive[];
+  motion?: RAMotionDescriptor;
   /** Runtime linkage — worlds, snapshots, traces, candidates. */
   runtimeRef?: {
     worldId?: string;
@@ -79,30 +79,30 @@ export interface RLPrimitive {
 export interface PrimitiveInput {
   id: string;
   meaning: string;
-  bounds?: RLBounds;
-  state?: RLVisualState;
+  bounds?: RABounds;
+  state?: RAVisualState;
   priority?: number;
-  children?: RLPrimitive[];
-  motion?: RLMotionDescriptor;
-  runtimeRef?: RLPrimitive["runtimeRef"];
+  children?: RAPrimitive[];
+  motion?: RAMotionDescriptor;
+  runtimeRef?: RAPrimitive["runtimeRef"];
   content?: Record<string, unknown>;
 }
 
-const ZERO: RLBounds = { x: 0, y: 0, width: 0, height: 0 };
+const ZERO: RABounds = { x: 0, y: 0, width: 0, height: 0 };
 
 interface PrimitiveSpec {
-  kind: RLVisualKind;
-  layer: RLDepthLayer;
-  defaultState: RLVisualState;
+  kind: RAVisualKind;
+  layer: RADepthLayer;
+  defaultState: RAVisualState;
   defaultPriority: number;
-  allowOverlap?: RLVisualObject["overlapReason"];
+  allowOverlap?: RAVisualObject["overlapReason"];
 }
 
 /**
  * What each primitive IS in runtime terms. Overlap permissions are part of
  * the primitive's nature and therefore always declared (contract rule 7).
  */
-const SPEC: Record<RLPrimitiveName, PrimitiveSpec> = {
+const SPEC: Record<RAPrimitiveName, PrimitiveSpec> = {
   // The void the World floats in — everything stands on it by design.
   SubstrateField: { kind: "field", layer: "substrate", defaultState: "ambient", defaultPriority: 0, allowOverlap: "depth-layer" },
   // The entry portal into a World.
@@ -133,12 +133,12 @@ const SPEC: Record<RLPrimitiveName, PrimitiveSpec> = {
   WorldGraphCanvas: { kind: "field", layer: "graph", defaultState: "projected", defaultPriority: 20, allowOverlap: "graph-edge-crossing" }
 };
 
-function make(name: RLPrimitiveName, input: PrimitiveInput): RLPrimitive {
+function make(name: RAPrimitiveName, input: PrimitiveInput): RAPrimitive {
   const spec = SPEC[name];
   if (!input.meaning) {
     throw new Error(`${name} "${input.id}" must declare its runtime meaning (contract rule 3)`);
   }
-  const object: RLVisualObject = {
+  const object: RAVisualObject = {
     id: input.id,
     kind: spec.kind,
     layer: depthOf(spec.layer),
@@ -160,23 +160,23 @@ function make(name: RLPrimitiveName, input: PrimitiveInput): RLPrimitive {
   };
 }
 
-export const WorldGate = (input: PrimitiveInput): RLPrimitive => make("WorldGate", input);
-export const RuntimeField = (input: PrimitiveInput): RLPrimitive => make("RuntimeField", input);
-export const ProjectionSurface = (input: PrimitiveInput): RLPrimitive => make("ProjectionSurface", input);
-export const RuntimeNode = (input: PrimitiveInput): RLPrimitive => make("RuntimeNode", input);
-export const TraceLine = (input: PrimitiveInput): RLPrimitive => make("TraceLine", input);
-export const CandidateLayer = (input: PrimitiveInput): RLPrimitive => {
+export const WorldGate = (input: PrimitiveInput): RAPrimitive => make("WorldGate", input);
+export const RuntimeField = (input: PrimitiveInput): RAPrimitive => make("RuntimeField", input);
+export const ProjectionSurface = (input: PrimitiveInput): RAPrimitive => make("ProjectionSurface", input);
+export const RuntimeNode = (input: PrimitiveInput): RAPrimitive => make("RuntimeNode", input);
+export const TraceLine = (input: PrimitiveInput): RAPrimitive => make("TraceLine", input);
+export const CandidateLayer = (input: PrimitiveInput): RAPrimitive => {
   const primitive = make("CandidateLayer", input);
   if (primitive.object.state === "committed") {
     throw new Error(`CandidateLayer "${input.id}" cannot carry committed state — possibility is not Reality (contract rule 9)`);
   }
   return primitive;
 };
-export const AuthorityBoundary = (input: PrimitiveInput): RLPrimitive => make("AuthorityBoundary", input);
-export const CommitSurface = (input: PrimitiveInput): RLPrimitive => make("CommitSurface", input);
-export const CapabilityConstellation = (input: PrimitiveInput): RLPrimitive => make("CapabilityConstellation", input);
-export const CompilerFlow = (input: PrimitiveInput): RLPrimitive => make("CompilerFlow", input);
-export const SubstrateField = (input: PrimitiveInput): RLPrimitive => make("SubstrateField", input);
-export const RippleField = (input: PrimitiveInput): RLPrimitive => make("RippleField", input);
-export const RecedeLayer = (input: PrimitiveInput): RLPrimitive => make("RecedeLayer", input);
-export const WorldGraphCanvas = (input: PrimitiveInput): RLPrimitive => make("WorldGraphCanvas", input);
+export const AuthorityBoundary = (input: PrimitiveInput): RAPrimitive => make("AuthorityBoundary", input);
+export const CommitSurface = (input: PrimitiveInput): RAPrimitive => make("CommitSurface", input);
+export const CapabilityConstellation = (input: PrimitiveInput): RAPrimitive => make("CapabilityConstellation", input);
+export const CompilerFlow = (input: PrimitiveInput): RAPrimitive => make("CompilerFlow", input);
+export const SubstrateField = (input: PrimitiveInput): RAPrimitive => make("SubstrateField", input);
+export const RippleField = (input: PrimitiveInput): RAPrimitive => make("RippleField", input);
+export const RecedeLayer = (input: PrimitiveInput): RAPrimitive => make("RecedeLayer", input);
+export const WorldGraphCanvas = (input: PrimitiveInput): RAPrimitive => make("WorldGraphCanvas", input);

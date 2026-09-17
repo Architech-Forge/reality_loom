@@ -1,8 +1,8 @@
 {
-  "name": "reality-loom",
+  "name": "reality-architecture",
   "version": "0.1.0",
   "private": true,
-  "description": "Reality Loom \u2014 the open foundation for Reality-Oriented Computing: WIL, WDL, WGE, SLI, SDK reference implementation.",
+  "description": "Reality Architecture \u2014 the open foundation for Reality-Oriented Computing: WIL, WDL, WGE, SLI, SDK reference implementation.",
   "type": "module",
   "engines": {
     "node": ">=22",
@@ -54,6 +54,6 @@
     "@roc/security": "workspace:*",
     "@roc/ai": "workspace:*",
     "@roc/devtools": "workspace:*",
-    "@realityloom/interface": "workspace:*"
+    "@realityarchitecture/interface": "workspace:*"
   }
 }

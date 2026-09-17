@@ -1,15 +1,15 @@
 /**
  * SLI projection bridge — SLI decides what should be experienced; this
- * bridge turns that plan into a Reality Loom scene, and registers as a
+ * bridge turns that plan into a Reality Architecture scene, and registers as a
  * conforming renderer adapter. Renderers express the scene; they never
  * reinterpret the projection (SLI-1500.012).
  */
 import type { SLIProjectionOutput, SLIRenderResult } from "@roc/types";
 import type { SLIRendererAdapter } from "@sli/renderer-contract";
 import { MINIMAL_RENDERER_CAPABILITIES } from "@sli/renderer-contract";
-import type { RLBounds } from "../layout/bounds.js";
+import type { RABounds } from "../layout/bounds.js";
 import { layoutProjection } from "../layout/projectionLayout.js";
-import type { RLLayoutDiagnostic } from "../layout/diagnostics.js";
+import type { RALayoutDiagnostic } from "../layout/diagnostics.js";
 import {
   CandidateLayer,
   ProjectionSurface,
@@ -17,24 +17,24 @@ import {
   RuntimeField,
   RuntimeNode,
   SubstrateField,
-  type RLPrimitive
+  type RAPrimitive
 } from "../primitives/index.js";
 import { projectMotion, simulateMotion } from "../motion/project.js";
 import { recedeMotion } from "../motion/recede.js";
-import { validateScene, type RLScene } from "../contract.js";
+import { validateScene, type RAScene } from "../contract.js";
 
 export interface SceneFromProjectionOptions {
-  viewport?: RLBounds;
+  viewport?: RABounds;
   /** Set when projecting a Candidate World — the scene wraps in a CandidateLayer. */
   candidateWorldId?: string;
   dev?: boolean;
 }
 
-const DEFAULT_VIEWPORT: RLBounds = { x: 0, y: 0, width: 1280, height: 800 };
+const DEFAULT_VIEWPORT: RABounds = { x: 0, y: 0, width: 1280, height: 800 };
 
 export interface SceneResult {
-  scene: RLScene;
-  layoutDiagnostics: RLLayoutDiagnostic[];
+  scene: RAScene;
+  layoutDiagnostics: RALayoutDiagnostic[];
   renderedEntityIds: string[];
   hiddenCount: number;
 }
@@ -55,7 +55,7 @@ export function sceneFromProjection(
   const visible = projection.rendererInstructions.filter((i) => i.projectionRole !== "hidden");
   const hidden = projection.rendererInstructions.filter((i) => i.projectionRole === "hidden");
 
-  const entityPrimitives: RLPrimitive[] = visible.map((instruction) => {
+  const entityPrimitives: RAPrimitive[] = visible.map((instruction) => {
     const placed = objectById.get(instruction.entityId);
     const composed = projection.composition.entities.find((e) => e.entityId === instruction.entityId);
     const meaning = composed?.reason ?? `projected as ${instruction.projectionRole}`;
@@ -115,7 +115,7 @@ export function sceneFromProjection(
       : entityPrimitives
   });
 
-  const scene: RLScene = {
+  const scene: RAScene = {
     id: `scene_${projection.id}`,
     viewport,
     primitives: [substrate],
@@ -141,10 +141,10 @@ export function sceneFromProjection(
  */
 export function createInterfaceRenderer(
   options: Omit<SceneFromProjectionOptions, "candidateWorldId"> = {}
-): SLIRendererAdapter & { lastScene(): RLScene | undefined } {
-  let last: RLScene | undefined;
+): SLIRendererAdapter & { lastScene(): RAScene | undefined } {
+  let last: RAScene | undefined;
   return {
-    id: "realityloom-interface",
+    id: "realityarchitecture-interface",
     platform: "custom",
     capabilities: { ...MINIMAL_RENDERER_CAPABILITIES, supportsMotion: true },
     async render(projection: SLIProjectionOutput): Promise<SLIRenderResult> {
@@ -153,11 +153,11 @@ export function createInterfaceRenderer(
       const violations = validateScene(result.scene);
       if (violations.length > 0) {
         return {
-          rendererId: "realityloom-interface",
+          rendererId: "realityarchitecture-interface",
           status: "failed",
           renderedEntityIds: [],
           diagnostics: violations.map((v) => ({
-            code: `RL_CONTRACT_RULE_${v.rule}`,
+            code: `RA_CONTRACT_RULE_${v.rule}`,
             severity: "error" as const,
             message: v.reason,
             reason: `Interface Contract rule ${v.rule}`,
@@ -166,7 +166,7 @@ export function createInterfaceRenderer(
         };
       }
       return {
-        rendererId: "realityloom-interface",
+        rendererId: "realityarchitecture-interface",
         status: "rendered",
         renderedEntityIds: result.renderedEntityIds
       };

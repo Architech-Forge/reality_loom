@@ -4,7 +4,7 @@
  * Text exists to reduce uncertainty; decorative text has no place here.
  */
 
-export type RLTypeRole =
+export type RATypeRole =
   | "world_title"
   | "surface_title"
   | "node_label"
@@ -14,8 +14,8 @@ export type RLTypeRole =
   | "candidate_marker"
   | "substrate_caption";
 
-export interface RLTypeToken {
-  role: RLTypeRole;
+export interface RATypeToken {
+  role: RATypeRole;
   /** rem scale — renderers may adapt for dynamic type. */
   size: number;
   weight: 300 | 400 | 500 | 600;
@@ -24,7 +24,7 @@ export interface RLTypeToken {
   mono: boolean;
 }
 
-export const rlTypography: Record<RLTypeRole, RLTypeToken> = {
+export const raTypography: Record<RATypeRole, RATypeToken> = {
   world_title: { role: "world_title", size: 1.75, weight: 300, tracking: "wide", mono: false },
   surface_title: { role: "surface_title", size: 1.125, weight: 500, tracking: "wide", mono: false },
   node_label: { role: "node_label", size: 0.8125, weight: 500, tracking: "normal", mono: false },

@@ -2,7 +2,7 @@
   "name": "@apps/world-studio",
   "version": "0.1.0",
   "private": true,
-  "description": "World Studio (TOOL-2100.002) — the Reality Loom OS demo: one living canvas projecting a real World through the full ROC stack. No pages, no reloads; the experience recomposes.",
+  "description": "World Studio (TOOL-2100.002) — the Reality Architecture OS demo: one living canvas projecting a real World through the full ROC stack. No pages, no reloads; the experience recomposes.",
   "type": "module",
   "scripts": {
     "dev": "vite",

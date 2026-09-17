@@ -4,23 +4,23 @@
  * keeps the record for devtools).
  */
 
-export interface RLLayoutDiagnostic {
+export interface RALayoutDiagnostic {
   code:
-    | "RL_LAYOUT_DISPLACED"
-    | "RL_LAYOUT_COLLAPSED"
-    | "RL_LAYOUT_INTENTIONAL_OVERLAP"
-    | "RL_LAYOUT_UNDECLARED_OVERLAP"
-    | "RL_LAYOUT_INVALID_OBJECT";
+    | "RA_LAYOUT_DISPLACED"
+    | "RA_LAYOUT_COLLAPSED"
+    | "RA_LAYOUT_INTENTIONAL_OVERLAP"
+    | "RA_LAYOUT_UNDECLARED_OVERLAP"
+    | "RA_LAYOUT_INVALID_OBJECT";
   objectId: string;
   otherId?: string;
   reason: string;
 }
 
-export interface RLLayoutDiagnosticsSink {
-  (diagnostic: RLLayoutDiagnostic): void;
+export interface RALayoutDiagnosticsSink {
+  (diagnostic: RALayoutDiagnostic): void;
 }
 
 /** Dev-mode console sink; renderers may substitute their own. */
-export const devDiagnosticsSink: RLLayoutDiagnosticsSink = (diagnostic) => {
+export const devDiagnosticsSink: RALayoutDiagnosticsSink = (diagnostic) => {
   console.warn(`[rl-layout] ${diagnostic.code} ${diagnostic.objectId}: ${diagnostic.reason}`);
 };

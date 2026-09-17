@@ -1,15 +1,15 @@
 # Trademark Notice
 
-This repository contains open-source software and public documentation for Reality Loom.
+This repository contains open-source software and public documentation for Reality Architecture.
 
 Open-source licenses in this repository do **not** grant trademark rights.
 
 ## Reserved Names and Marks
 
-The following names, marks, logos, slogans, and related brand identifiers are reserved by Architech Forge LLC and/or the future Reality Loom entity:
+The following names, marks, logos, slogans, and related brand identifiers are reserved by Architech Forge LLC and/or the future Reality Architecture entity:
 
-- Reality Loom
-- The Reality Loom
+- Reality Architecture
+- The Reality Architecture
 - Reality-Oriented Computing
 - ROC
 - World Graph Engine
@@ -24,14 +24,14 @@ The following names, marks, logos, slogans, and related brand identifiers are re
 - SLI
 - Describe reality. Compute understanding. Project experience.
 - The substrate for living software.
-- Any official Reality Loom logos, badges, certification labels, or compatibility marks
+- Any official Reality Architecture logos, badges, certification labels, or compatibility marks
 
 ## Permitted Reference Use
 
 You may use the names above to truthfully describe compatibility, origin, discussion, research, commentary, or contribution, such as:
 
 ```text
-Built with Reality Loom-compatible types.
+Built with Reality Architecture-compatible types.
 Implements part of the WIL draft protocol.
 Based on the Reality-Oriented Computing Codex.
 ```
@@ -45,12 +45,12 @@ You may not:
 - use reserved marks as your product/company name
 - use confusingly similar names
 - use official logos or badges without permission
-- present modified implementations as official Reality Loom releases
+- present modified implementations as official Reality Architecture releases
 
 ## Certification Language
 
-Terms such as "Reality Loom Certified", "ROC Certified", "WGE Certified", or similar compatibility/certification marks are reserved for future official programs.
+Terms such as "Reality Architecture Certified", "ROC Certified", "WGE Certified", or similar compatibility/certification marks are reserved for future official programs.
 
 ## Ownership Transition
 
-Reality Loom is currently owned/published by Architech Forge LLC. The long-term plan is for Reality Loom to become its own dedicated company/platform steward. Trademark ownership and stewardship may be transferred or assigned as part of that transition.
+Reality Architecture (formerly Reality Loom) is currently owned/published by Architech Forge LLC. The long-term plan is for Reality Architecture to become its own dedicated company/platform steward. Trademark ownership and stewardship may be transferred or assigned as part of that transition.

@@ -1,6 +1,6 @@
-# Reality Loom Interface Contract
+# Reality Architecture Interface Contract
 
-1. Reality Loom does not use cards as its primary visual metaphor.
+1. Reality Architecture does not use cards as its primary visual metaphor.
 2. Every visible element is a field, node, trace, surface, layer, projection, or boundary.
 3. The UI must visually express runtime behavior.
 4. Generic SaaS layouts are invalid.
@@ -9,13 +9,13 @@
 7. No visual object may overlap another unless explicitly intentional.
 8. Motion must express projection, trace, ripple, commit, recede, or recomposition.
 9. The system must distinguish candidate state from committed reality.
-10. Reality Loom should feel like an operating substrate, not a website template.
+10. Reality Architecture should feel like an operating substrate, not a website template.
 
 ---
 
 ## Enforcement
 
-This contract is executable. `@realityloom/interface` enforces it:
+This contract is executable. `@realityarchitecture/interface` enforces it:
 
 - The primitive registry exports only world-native primitives; the forbidden
   primitive names (`Card`, `FeatureCard`, `Panel`, `DashboardShell`,

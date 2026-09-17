@@ -1,8 +1,8 @@
-# Reality Loom: Opening the Foundation for Reality-Oriented Computing
+# Reality Architecture: Opening the Foundation for Reality-Oriented Computing
 
-I’m releasing the early public foundation for **Reality Loom**.
+I’m releasing the early public foundation for **Reality Architecture**.
 
-Reality Loom is my foundation for **Reality-Oriented Computing** — a new way to build software as living worlds instead of screens wrapped around data.
+Reality Architecture is my foundation for **Reality-Oriented Computing** — a new way to build software as living worlds instead of screens wrapped around data.
 
 For decades, most software has been built around pages, dashboards, forms, feeds, and components.
 
@@ -16,7 +16,7 @@ They need a runtime that understands possible state versus committed state.
 
 They need interfaces projected from meaning, not assembled from disconnected UI pieces.
 
-That is what Reality Loom is for.
+That is what Reality Architecture is for.
 
 ```text
 Describe reality.
@@ -24,9 +24,9 @@ Compute understanding.
 Project experience.
 ```
 
-## What Reality Loom Introduces
+## What Reality Architecture Introduces
 
-Reality Loom is the open foundation for:
+Reality Architecture is the open foundation for:
 
 - **Reality-Oriented Computing** — the philosophy and category
 - **World Graph Engine** — the graph substrate for living worlds
@@ -52,7 +52,7 @@ I’m open-sourcing the foundation because I think this deserves to exist as a p
 
 The private products built on top remain private.
 
-Reality Loom is the foundation.
+Reality Architecture is the foundation.
 
 The applications are the proof.
 
@@ -71,9 +71,9 @@ It does not include proprietary products, private prompts, private app code, com
 
 ## Ownership
 
-Reality Loom is currently owned and published by **Architech Forge**.
+Reality Architecture is currently owned and published by **Architech Forge**.
 
-The long-term intent is for Reality Loom to become its own dedicated company/platform steward — the long-term home for the category, standards, and ecosystem.
+The long-term intent is for Reality Architecture to become its own dedicated company/platform steward — the long-term home for the category, standards, and ecosystem.
 
 ## Current Status
 
@@ -97,4 +97,4 @@ The future of software will not be a better dashboard.
 
 It will be systems that understand context, constraints, objectives, relationships, history, privacy, and possibility.
 
-Reality Loom is my attempt to define that foundation in public.
+Reality Architecture is my attempt to define that foundation in public.

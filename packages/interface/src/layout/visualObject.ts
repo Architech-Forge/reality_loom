@@ -1,10 +1,10 @@
 /**
- * The runtime visual object model — every visible thing in Reality Loom is
+ * The runtime visual object model — every visible thing in Reality Architecture is
  * one of these. Kinds are world-native (Interface Contract rule 2): there is
  * no card, panel, or generic section in this union, by design.
  */
 
-export interface RLVisualObject {
+export interface RAVisualObject {
   id: string;
 
   kind:
@@ -46,11 +46,11 @@ export interface RLVisualObject {
     | "graph-edge-crossing";
 }
 
-export type RLVisualKind = RLVisualObject["kind"];
-export type RLVisualState = RLVisualObject["state"];
-export type RLOverlapReason = NonNullable<RLVisualObject["overlapReason"]>;
+export type RAVisualKind = RAVisualObject["kind"];
+export type RAVisualState = RAVisualObject["state"];
+export type RAOverlapReason = NonNullable<RAVisualObject["overlapReason"]>;
 
-export const RL_VISUAL_KINDS: readonly RLVisualKind[] = [
+export const RA_VISUAL_KINDS: readonly RAVisualKind[] = [
   "field",
   "surface",
   "node",
@@ -62,7 +62,7 @@ export const RL_VISUAL_KINDS: readonly RLVisualKind[] = [
   "projection"
 ] as const;
 
-export const RL_OVERLAP_REASONS: readonly RLOverlapReason[] = [
+export const RA_OVERLAP_REASONS: readonly RAOverlapReason[] = [
   "intentional-orbit",
   "modal",
   "active-trace",
@@ -74,15 +74,15 @@ export const RL_OVERLAP_REASONS: readonly RLOverlapReason[] = [
  * Structural validation: overlap permission must be declared AND traceable —
  * `allowOverlap` without an `overlapReason` is an undeclared overlap.
  */
-export function validateVisualObject(object: RLVisualObject): string[] {
+export function validateVisualObject(object: RAVisualObject): string[] {
   const problems: string[] = [];
-  if (!RL_VISUAL_KINDS.includes(object.kind)) {
+  if (!RA_VISUAL_KINDS.includes(object.kind)) {
     problems.push(`"${object.id}" has non-world-native kind "${object.kind}" (contract rule 2)`);
   }
   if (object.allowOverlap === true && object.overlapReason === undefined) {
     problems.push(`"${object.id}" allows overlap without declaring a reason (contract rule 7)`);
   }
-  if (object.overlapReason !== undefined && !RL_OVERLAP_REASONS.includes(object.overlapReason)) {
+  if (object.overlapReason !== undefined && !RA_OVERLAP_REASONS.includes(object.overlapReason)) {
     problems.push(`"${object.id}" declares unknown overlap reason "${object.overlapReason}"`);
   }
   if (object.bounds.width < 0 || object.bounds.height < 0) {

@@ -3,7 +3,7 @@
  * substrate breathes, structure clusters, boundaries separate.
  */
 
-export const rlSpacing = {
+export const raSpacing = {
   /** Hairline offsets inside nodes. */
   quantum: 2,
   /** Intra-node padding. */
@@ -18,7 +18,7 @@ export const rlSpacing = {
   substrate: 72
 } as const;
 
-export type RLSpacingToken = keyof typeof rlSpacing;
+export type RASpacingToken = keyof typeof raSpacing;
 
 /** Minimum gap the no-overlap engine preserves between visual objects. */
-export const RL_MIN_GAP = rlSpacing.node;
+export const RA_MIN_GAP = raSpacing.node;

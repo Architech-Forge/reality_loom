@@ -11,5 +11,5 @@ This documentation license does **not** grant trademark rights. See [`TRADEMARKS
 Suggested attribution:
 
 ```text
-Reality Loom / Reality-Oriented Computing, published by Architech Forge.
+Reality Architecture / Reality-Oriented Computing, published by Architech Forge.
 ```

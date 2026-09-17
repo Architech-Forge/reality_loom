@@ -1,6 +1,6 @@
 # Contributing
 
-Reality Loom is currently in early public foundation stage.
+Reality Architecture is currently in early public foundation stage.
 
 Contributions are welcome, but the project is still defining its governance model.
 
@@ -40,7 +40,7 @@ Please do not contribute:
 - user data
 - vendor-locked assumptions
 - code that bypasses runtime authority
-- UI patterns that turn Reality Loom into a dashboard framework
+- UI patterns that turn Reality Architecture into a dashboard framework
 
 ## Contribution License
 

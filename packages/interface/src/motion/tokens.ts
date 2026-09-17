@@ -1,12 +1,12 @@
 /**
- * Motion semantics. Reality Loom motion is not generic animation — it
+ * Motion semantics. Reality Architecture motion is not generic animation — it
  * expresses runtime concepts. If motion does not express projection, trace,
  * ripple, commit, recede, or recomposition, it does not exist
  * (Interface Contract rule 8; SLI-1500.009: motion must clarify).
  */
 
 /** The complete motion vocabulary. Nothing outside it is valid. */
-export type RLMotionVerb =
+export type RAMotionVerb =
   | "project"
   | "recede"
   | "ripple"
@@ -18,7 +18,7 @@ export type RLMotionVerb =
   | "collapse"
   | "recompose";
 
-export const RL_MOTION_VOCABULARY: readonly RLMotionVerb[] = [
+export const RA_MOTION_VOCABULARY: readonly RAMotionVerb[] = [
   "project",
   "recede",
   "ripple",
@@ -31,7 +31,7 @@ export const RL_MOTION_VOCABULARY: readonly RLMotionVerb[] = [
   "recompose"
 ] as const;
 
-export const rlMotion = {
+export const raMotion = {
   ripple: {
     duration: 0.7,
     ease: [0.16, 1, 0.3, 1]
@@ -59,7 +59,7 @@ export const rlMotion = {
 } as const;
 
 /** Verbs that share timing with a base token. */
-const TIMING_ALIAS: Record<RLMotionVerb, keyof typeof rlMotion> = {
+const TIMING_ALIAS: Record<RAMotionVerb, keyof typeof raMotion> = {
   project: "project",
   recede: "recede",
   ripple: "ripple",
@@ -72,8 +72,8 @@ const TIMING_ALIAS: Record<RLMotionVerb, keyof typeof rlMotion> = {
   recompose: "project" // recomposition is re-projection with continuity
 };
 
-export interface RLMotionDescriptor {
-  verb: RLMotionVerb;
+export interface RAMotionDescriptor {
+  verb: RAMotionVerb;
   duration: number;
   ease: readonly number[];
   /** What runtime event this motion expresses — required and traceable. */
@@ -85,17 +85,17 @@ export interface RLMotionDescriptor {
 }
 
 export function describeMotion(
-  verb: RLMotionVerb,
+  verb: RAMotionVerb,
   reason: string,
-  options: { traceId?: string; reducedMotionAlternative?: RLMotionDescriptor["reducedMotionAlternative"] } = {}
-): RLMotionDescriptor {
-  if (!RL_MOTION_VOCABULARY.includes(verb)) {
-    throw new Error(`"${verb}" is not in the Reality Loom motion vocabulary (Interface Contract rule 8)`);
+  options: { traceId?: string; reducedMotionAlternative?: RAMotionDescriptor["reducedMotionAlternative"] } = {}
+): RAMotionDescriptor {
+  if (!RA_MOTION_VOCABULARY.includes(verb)) {
+    throw new Error(`"${verb}" is not in the Reality Architecture motion vocabulary (Interface Contract rule 8)`);
   }
   if (!reason) {
     throw new Error("motion must declare the runtime behavior it expresses — motion must clarify");
   }
-  const timing = rlMotion[TIMING_ALIAS[verb]];
+  const timing = raMotion[TIMING_ALIAS[verb]];
   return {
     verb,
     duration: timing.duration,

@@ -3,7 +3,7 @@
  * Layers are runtime meanings; z.ts maps them to stacking numbers.
  */
 
-export type RLDepthLayer =
+export type RADepthLayer =
   | "substrate" // the void the World floats in
   | "recede" // receded context, still recoverable
   | "field" // resting runtime fields
@@ -14,7 +14,7 @@ export type RLDepthLayer =
   | "authority" // boundaries and permission edges
   | "commit"; // consequential commit surfaces — topmost
 
-export const RL_DEPTH_ORDER: readonly RLDepthLayer[] = [
+export const RA_DEPTH_ORDER: readonly RADepthLayer[] = [
   "substrate",
   "recede",
   "field",
@@ -26,4 +26,4 @@ export const RL_DEPTH_ORDER: readonly RLDepthLayer[] = [
   "commit"
 ] as const;
 
-export const depthOf = (layer: RLDepthLayer): number => RL_DEPTH_ORDER.indexOf(layer);
+export const depthOf = (layer: RADepthLayer): number => RA_DEPTH_ORDER.indexOf(layer);

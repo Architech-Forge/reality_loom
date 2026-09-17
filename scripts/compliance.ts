@@ -19,8 +19,8 @@ import { devtoolsSuite } from "../compliance/suites/devtools.suite.js";
 import { interfaceSuite } from "../compliance/suites/interface.suite.js";
 
 const declaration: ROCComplianceDeclaration = {
-  implementationId: "the-reality-loom",
-  implementationName: "The Reality Loom Reference Implementation",
+  implementationId: "the-reality-architecture",
+  implementationName: "The Reality Architecture Reference Implementation",
   version: ROC_REFERENCE_VERSION,
   claimedLevels: ["wil_only", "kernel", "compiler", "runtime", "physics", "sli", "sdk", "application", "reference"],
   supportedSpecVersions: {

@@ -1,6 +1,6 @@
 # Repository Boundaries
 
-Reality Loom is the open foundation.
+Reality Architecture is the open foundation.
 
 Private applications and proprietary product systems are not part of this repository.
 
